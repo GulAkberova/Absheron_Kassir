@@ -7,33 +7,6 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- <form id="imageForm">
-      <input type="file" accept="image/*" capture="camera" id="imageInput" />
-      <button type="button" id="captureButton">Capture and Upload</button>
-    </form>
-    <img id="capturedImage" src="#" alt="Captured Image" />
-    <script>
-      const imageInput = document.getElementById("imageInput");
-      const captureButton = document.getElementById("captureButton");
-      const capturedImage = document.getElementById("capturedImage");
-
-      captureButton.addEventListener("click", async () => {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-          });
-          const videoTrack = stream.getVideoTracks()[0];
-          const imageCapture = new ImageCapture(videoTrack);
-
-          const photoBlob = await imageCapture.takePhoto();
-          const imageUrl = URL.createObjectURL(photoBlob);
-
-          capturedImage.src = imageUrl;
-        } catch (error) {
-          console.error("Error capturing image:", error);
-        }
-      });
-    </script> -->
     <div id="cameraContainer">
       <button id="captureButton">
         <svg
@@ -50,7 +23,7 @@
         </svg>
         Open Camera
       </button>
-      <video id="cameraFeed" style="display: none"></video>
+      <video id="cameraFeed" style="display: block"></video>
       <canvas id="canvas" style="display: none"></canvas>
       <img id="capturedImage" style="display: none" />
     </div>
@@ -67,11 +40,13 @@
             video: true,
           });
 
-          cameraFeed.style.display = "block"; // Kamera görüntüsünü göster
-          captureButton.style.display = "none"; // Butonu gizle
-
+          // Kamera görüntüsünü göster
+          cameraFeed.style.display = "block";
           cameraFeed.srcObject = stream;
           cameraFeed.play();
+
+          // Butonu gizle
+          captureButton.style.display = "none";
         } catch (error) {
           console.error("Error accessing camera:", error);
         }

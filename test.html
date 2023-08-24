@@ -4,6 +4,33 @@
     <title>Kamera Uygulaması</title>
   </head>
   <body>
+    <!-- <form id="imageForm">
+      <input type="file" accept="image/*" capture="camera" id="imageInput" />
+      <button type="button" id="captureButton">Capture and Upload</button>
+    </form>
+    <img id="capturedImage" src="#" alt="Captured Image" />
+    <script>
+      const imageInput = document.getElementById("imageInput");
+      const captureButton = document.getElementById("captureButton");
+      const capturedImage = document.getElementById("capturedImage");
+
+      captureButton.addEventListener("click", async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+          });
+          const videoTrack = stream.getVideoTracks()[0];
+          const imageCapture = new ImageCapture(videoTrack);
+
+          const photoBlob = await imageCapture.takePhoto();
+          const imageUrl = URL.createObjectURL(photoBlob);
+
+          capturedImage.src = imageUrl;
+        } catch (error) {
+          console.error("Error capturing image:", error);
+        }
+      });
+    </script> -->
     <button id="cameraButton">
       <img src="camera-icon.png" alt="Kamera İkonu" />
     </button>

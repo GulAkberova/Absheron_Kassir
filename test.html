@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kamera Uygulaması</title>
+  </head>
+  <body>
+    <button id="cameraButton">
+      <img src="camera-icon.png" alt="Kamera İkonu" />
+    </button>
+    <div id="imageContainer" style="display: none">
+      <img id="capturedImage" width="50" height="50" alt="Çekilen Resim" />
+    </div>
+
+    <script>
+      const cameraButton = document.getElementById("cameraButton");
+      const imageContainer = document.getElementById("imageContainer");
+      const capturedImage = document.getElementById("capturedImage");
+
+      cameraButton.addEventListener("click", async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+          });
+          const video = document.createElement("video");
+          video.srcObject = stream;
+          video.autoplay = true;
+
+          const canvas = document.createElement("canvas");
+          canvas.width = 50;
+          canvas.height = 50;
+
+          const context = canvas.getContext("2d");
+
+          // Beklemek için birkaç saniye
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          // Kamera görüntüsünü canvas'a çiz
+          context.drawImage(video, 0, 0, 50, 50);
+
+          // Çekilen resmi göster
+          capturedImage.src = canvas.toDataURL("image/png");
+          imageContainer.style.display = "block";
+
+          // Kamerayı kapat
+          stream.getVideoTracks().forEach((track) => track.stop());
+        } catch (error) {
+          console.error("Hata:", error);
+        }
+      });
+    </script>
+  </body>
+</html>

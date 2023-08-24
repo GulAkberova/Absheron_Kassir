@@ -14,16 +14,17 @@ body {
 }
 
 #cameraContainer {
-  border: 2px solid red;
+  border: 2px solid white;
   max-width: 600px;
   width: 100%;
   height: 200px;
   display: flex;
   align-items: center;
   gap: 30px;
+  padding: 0px 30px;
+  border-radius: 30px;
 }
 #captureButton {
-  border: 2px solid red;
   padding: 10px 13px;
   border-radius: 10px;
   border: 2px solid white;
@@ -36,10 +37,4 @@ body {
 #captureButton:hover {
   background-color: white;
   color: cornflowerblue;
-}
-#cameraFeed,
-#capturedImage {
-  border: 2px solid red;
-  width: 100px;
-  height: 100px;
 }

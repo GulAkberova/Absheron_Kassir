@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -11,6 +10,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
@@ -47,22 +47,89 @@
         }
       });
 
-      cameraFeed.addEventListener("click", () => {
+      let capturedPhotoBlob = null;
+      let overlayContainer = null; // Değişkeni tanımlayın
+
+      cameraFeed.addEventListener("click", async () => {
         canvas.width = cameraFeed.videoWidth;
         canvas.height = cameraFeed.videoHeight;
         canvas
           .getContext("2d")
           .drawImage(cameraFeed, 0, 0, canvas.width, canvas.height);
 
-        const newImage = document.createElement("img");
-        newImage.src = canvas.toDataURL("image/png");
-        newImage.style.width = "80px";
-        newImage.style.height = "80px";
-        newImage.style.objectFit = "cover";
-        newImage.style.margin = "5px";
+        capturedPhotoBlob = await new Promise((resolve) =>
+          canvas.toBlob((blob) => {
+            resolve(blob);
+          }, "image/jpeg")
+        );
 
-        imageContainer.appendChild(newImage);
+        createOverlay();
       });
+
+      function createOverlay() {
+        overlayContainer = document.createElement("div");
+        overlayContainer.style.position = "fixed";
+        overlayContainer.style.top = "0";
+        overlayContainer.style.left = "0";
+        overlayContainer.style.width = "100%";
+        overlayContainer.style.height = "100%";
+        overlayContainer.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+        overlayContainer.style.display = "flex";
+        overlayContainer.style.alignItems = "center";
+        overlayContainer.style.justifyContent = "center";
+        document.body.appendChild(overlayContainer);
+
+        const overlayContent = document.createElement("div");
+        overlayContent.style.backgroundColor = "#fff";
+        overlayContent.style.padding = "20px";
+        overlayContent.style.borderRadius = "10px";
+        overlayContent.style.display = "flex";
+        overlayContent.style.flexDirection = "column";
+        overlayContent.style.alignItems = "center";
+        overlayContainer.appendChild(overlayContent);
+
+        const overlayImage = document.createElement("img");
+        overlayImage.src = URL.createObjectURL(capturedPhotoBlob);
+        overlayImage.style.width = "300px";
+        overlayImage.style.height = "auto";
+        overlayContent.appendChild(overlayImage);
+
+        const addButton = document.createElement("button");
+        addButton.textContent = "Add";
+        addButton.style.marginTop = "10px";
+        addButton.addEventListener("click", () => {
+          imageContainer.appendChild(createThumbnail(capturedPhotoBlob));
+          closeOverlay();
+        });
+        overlayContent.appendChild(addButton);
+
+        const cancelButton = document.createElement("button");
+        cancelButton.textContent = "Cancel";
+        cancelButton.style.marginTop = "5px";
+        cancelButton.addEventListener("click", () => {
+          closeOverlay();
+        });
+        overlayContent.appendChild(cancelButton);
+      }
+
+      function createThumbnail(blob) {
+        const thumbnail = document.createElement("img");
+        thumbnail.src = URL.createObjectURL(blob);
+        thumbnail.style.width = "80px";
+        thumbnail.style.height = "80px";
+        thumbnail.style.objectFit = "cover";
+        thumbnail.style.margin = "5px";
+        return thumbnail;
+      }
+
+      function closeOverlay() {
+        cameraFeed.style.display = "none";
+        captureButton.style.display = "block";
+        capturedPhotoBlob = null;
+        if (overlayContainer) {
+          document.body.removeChild(overlayContainer);
+        }
+      }
     </script>
   </body>
 </html>

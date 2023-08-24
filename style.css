@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 body {
-  background-color: cornflowerblue;
+  background-color: black;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -15,14 +15,14 @@ body {
 
 #cameraContainer {
   border: 2px solid white;
-  max-width: 600px;
+  max-width: 320px;
   width: 100%;
-  height: 200px;
+  /* height: 80px; */
   display: flex;
   align-items: center;
   gap: 30px;
-  padding: 0px 30px;
-  border-radius: 30px;
+  padding: 20px 30px;
+  border-radius: 20px;
 }
 #captureButton {
   padding: 10px 13px;
@@ -37,4 +37,16 @@ body {
 #captureButton:hover {
   background-color: white;
   color: cornflowerblue;
+}
+#cameraFeed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: black;
+}
+#imageContainer img {
+  border: 2px solid white;
+  border-radius: 10px;
 }

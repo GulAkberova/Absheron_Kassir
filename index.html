@@ -21,6 +21,7 @@
       <video id="cameraFeed" style="display: none"></video>
       <canvas id="canvas" style="display: none"></canvas>
       <div id="imageContainer" style="display: flex; flex-wrap: wrap"></div>
+      <button id="saveButton" style="display: none">Save</button>
     </div>
 
     <script>
@@ -28,6 +29,8 @@
       const captureButton = document.getElementById("captureButton");
       const canvas = document.getElementById("canvas");
       const imageContainer = document.getElementById("imageContainer");
+      const saveButton = document.getElementById("saveButton");
+      let selectedImages = [];
 
       let facingMode = "environment"; // Başlangıçta arka kamera
 
@@ -49,6 +52,16 @@
 
       let capturedPhotoBlob = null;
       let overlayContainer = null; // Değişkeni tanımlayın
+
+      // Kameranın boyutlarını pencere boyutlarına uygun olarak güncelle
+      cameraFeed.width = window.innerWidth;
+      cameraFeed.height = window.innerHeight;
+
+      // KameraFeed boyutlarını güncelle
+      window.addEventListener("resize", () => {
+        cameraFeed.width = window.innerWidth;
+        cameraFeed.height = window.innerHeight;
+      });
 
       cameraFeed.addEventListener("click", async () => {
         canvas.width = cameraFeed.videoWidth;
@@ -81,7 +94,7 @@
 
         const overlayContent = document.createElement("div");
         overlayContent.style.backgroundColor = "#fff";
-        overlayContent.style.padding = "20px";
+        overlayContent.style.padding = "10px";
         overlayContent.style.borderRadius = "10px";
         overlayContent.style.display = "flex";
         overlayContent.style.flexDirection = "column";
@@ -92,13 +105,23 @@
         overlayImage.src = URL.createObjectURL(capturedPhotoBlob);
         overlayImage.style.width = "300px";
         overlayImage.style.height = "auto";
+        overlayImage.style.borderRadius = "10px";
+
         overlayContent.appendChild(overlayImage);
 
         const addButton = document.createElement("button");
         addButton.textContent = "Add";
         addButton.style.marginTop = "10px";
         addButton.addEventListener("click", () => {
+          const currentTime = new Date(); // Şu anki tarih ve saat
+          const imageData = {
+            blob: capturedPhotoBlob,
+            timestamp: currentTime.toISOString(), // Tarih ve saat ISO 8601 formatında
+          };
+
           imageContainer.appendChild(createThumbnail(capturedPhotoBlob));
+          selectedImages.push(imageData);
+          saveButton.style.display = "block";
           closeOverlay();
         });
         overlayContent.appendChild(addButton);
@@ -130,6 +153,16 @@
           document.body.removeChild(overlayContainer);
         }
       }
+
+      saveButton.addEventListener("click", () => {
+        if (selectedImages.length > 0) {
+          console.log("Selected Images:", selectedImages);
+          // Burada seçilen görüntüleri sunucuya gönderme işlemini yapabilirsiniz.
+          // Örneğin fetch() veya XMLHttpRequest kullanarak POST isteği göndermek.
+        } else {
+          console.log("No images selected.");
+        }
+      });
     </script>
   </body>
 </html>

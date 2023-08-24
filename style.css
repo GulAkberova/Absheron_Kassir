@@ -12,10 +12,34 @@ body {
   justify-content: center;
   align-items: center;
 }
-form {
-  height: 300px;
-  max-width: 500px;
-  background-color: white;
-  border-radius: 30px;
+
+#cameraContainer {
   border: 2px solid red;
+  max-width: 600px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+#captureButton {
+  border: 2px solid red;
+  padding: 10px 13px;
+  border-radius: 10px;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.5s all ease;
+}
+
+#captureButton:hover {
+  background-color: white;
+  color: cornflowerblue;
+}
+#cameraFeed,
+#capturedImage {
+  border: 2px solid red;
+  width: 100px;
+  height: 100px;
 }

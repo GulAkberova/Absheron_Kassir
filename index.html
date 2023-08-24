@@ -4,41 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Document</title>
   </head>
   <body>
     <div id="cameraContainer">
       <button id="captureButton">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path
-            fill="currentColor"
-            d="M19 3h-2.1l-1.4-1.4C14.1 1.1 13.6 1 13 1H6C4.3 1 3 2.3 3 4v16c0 1.7 1.3 3 3 3h12c1.7 0 3-1.3 3-3V6c0-1.1-.9-2-2-2zm0 18H5V5h8V3H6C5.4 3 5 3.4 5 4v16c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-2h-2v2z"
-          />
-        </svg>
-        Open Camera
+        <i class="fa-solid fa-camera"></i>
       </button>
       <video id="cameraFeed" style="display: none"></video>
       <canvas id="canvas" style="display: none"></canvas>
-      <img id="capturedImage" style="display: none" />
+      <div id="imageContainer" style="display: flex; flex-wrap: wrap"></div>
     </div>
 
     <script>
       const cameraFeed = document.getElementById("cameraFeed");
       const captureButton = document.getElementById("captureButton");
       const canvas = document.getElementById("canvas");
-      const capturedImage = document.getElementById("capturedImage");
-      let facingMode = "environment"; // Başlangıçta ön kamera
+      const imageContainer = document.getElementById("imageContainer");
+
+      let facingMode = "environment"; // Başlangıçta arka kamera
+
       captureButton.addEventListener("click", async () => {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({
             video: { facingMode: facingMode },
           });
+
           cameraFeed.style.display = "block"; // Kamera görüntüsünü göster
           captureButton.style.display = "none"; // Butonu gizle
 
@@ -56,8 +54,14 @@
           .getContext("2d")
           .drawImage(cameraFeed, 0, 0, canvas.width, canvas.height);
 
-        capturedImage.src = canvas.toDataURL("image/png");
-        capturedImage.style.display = "block";
+        const newImage = document.createElement("img");
+        newImage.src = canvas.toDataURL("image/png");
+        newImage.style.width = "80px";
+        newImage.style.height = "80px";
+        newImage.style.objectFit = "cover";
+        newImage.style.margin = "5px";
+
+        imageContainer.appendChild(newImage);
       });
     </script>
   </body>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <form>
+      <input type="text" placeholder="Name" />
+      <input type="file" />
+    </form> -->
+    <form id="imageForm">
+      <input type="file" accept="image/*" capture="camera" id="imageInput" />
+      <button type="button" id="captureButton">Capture and Upload</button>
+    </form>
+    <img id="capturedImage" src="#" alt="Captured Image" />
+    <script>
+      const imageInput = document.getElementById("imageInput");
+      const captureButton = document.getElementById("captureButton");
+      const capturedImage = document.getElementById("capturedImage");
+
+      captureButton.addEventListener("click", async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+          });
+          const videoTrack = stream.getVideoTracks()[0];
+          const imageCapture = new ImageCapture(videoTrack);
+
+          const photoBlob = await imageCapture.takePhoto();
+          const imageUrl = URL.createObjectURL(photoBlob);
+
+          capturedImage.src = imageUrl;
+
+          // Image Blob'u sunucuya yüklemek için gerekli adımları uygulayabilirsiniz.
+          // Örnek olarak fetch() kullanarak POST isteği gönderebilirsiniz.
+        } catch (error) {
+          console.error("Error capturing image:", error);
+        }
+      });
+    </script>
+  </body>
+</html>

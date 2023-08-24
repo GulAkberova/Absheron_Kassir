@@ -7,11 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- <form>
-      <input type="text" placeholder="Name" />
-      <input type="file" />
-    </form> -->
-    <form id="imageForm">
+    <!-- <form id="imageForm">
       <input type="file" accept="image/*" capture="camera" id="imageInput" />
       <button type="button" id="captureButton">Capture and Upload</button>
     </form>
@@ -33,13 +29,42 @@
           const imageUrl = URL.createObjectURL(photoBlob);
 
           capturedImage.src = imageUrl;
-
-          // Image Blob'u sunucuya yüklemek için gerekli adımları uygulayabilirsiniz.
-          // Örnek olarak fetch() kullanarak POST isteği gönderebilirsiniz.
         } catch (error) {
           console.error("Error capturing image:", error);
         }
       });
+    </script> -->
+    <video id="cameraFeed" autoplay></video>
+    <button id="captureButton">Capture Photo</button>
+    <canvas id="canvas" style="display: none"></canvas>
+    <img id="capturedImage" style="display: none" />
+    <script>
+      const cameraFeed = document.getElementById("cameraFeed");
+      const captureButton = document.getElementById("captureButton");
+      const canvas = document.getElementById("canvas");
+      const capturedImage = document.getElementById("capturedImage");
+
+      async function setupCamera() {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        cameraFeed.srcObject = stream;
+      }
+
+      function capturePhoto() {
+        canvas.width = cameraFeed.videoWidth;
+        canvas.height = cameraFeed.videoHeight;
+        canvas
+          .getContext("2d")
+          .drawImage(cameraFeed, 0, 0, canvas.width, canvas.height);
+
+        capturedImage.src = canvas.toDataURL("image/png");
+        capturedImage.style.display = "block";
+      }
+
+      captureButton.addEventListener("click", capturePhoto);
+
+      setupCamera();
     </script>
   </body>
 </html>

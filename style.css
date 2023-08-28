@@ -1,17 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 * {
   margin: 0;
   padding: 0;
   list-style: none;
   text-decoration: none;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-body {
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --blue-color: #000348;
+  --sea-color: #27aae2;
+  --green-color: #23c62a;
+  --red-color: #f70000;
+  --gray-color: rgba(129, 129, 129, 0.5);
+  --metal-color: #ece9e9;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 0px 25px;
+}
+@media (max-width: 550px) {
+  .container {
+    padding: 0px 15px;
+  }
+}
+/* body {
   background-color: black;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 #cameraContainer {
   border: 2px solid white;

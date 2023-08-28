@@ -1,0 +1,267 @@
+.status_header {
+  border-bottom: 1px solid var(--gray-color);
+}
+.status_header_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 0px;
+}
+/* _________________Status_Body_________________ */
+.status_body {
+  padding: 23px 0px;
+}
+.status_body_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.status_body_header h2 {
+  color: var(--blue-color);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.status_body_header p {
+  color: #000348;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+/* _____________________Status_body_Info_______ */
+.status_body_infodiv {
+  background-color: var(--metal-color);
+  border-radius: 5px;
+  padding: 16px 25px;
+  margin: 19px 0px 12px 0px;
+}
+.status_body_infodiv p {
+  color: var(--blue-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.status_body_infodiv_divs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0px;
+}
+.status_body_infodiv_divs div {
+  color: var(--white-color);
+  text-align: center;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 34.2px; /* 106.875% */
+  letter-spacing: -0.16px;
+  border-radius: 6px;
+  background: #ff1414;
+  max-width: 100px;
+  width: 100%;
+  padding: 0px 12px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.status_body_infodiv_textdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.status_body_infodiv_textdiv div h3 {
+  color: var(--blue-color);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.14px;
+}
+.status_body_infodiv_textdiv div:nth-of-type(1) h3 {
+  color: var(--red-color);
+}
+/* ______________Status_body_Phone_______________ */
+.status_body_phone {
+  background-color: var(--metal-color);
+  border-radius: 5px;
+  padding: 16px 25px;
+  margin: 19px 0px 12px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.status_body_phone div p {
+  color: var(--sea-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.status_body_phone div h2 {
+  color: #000348;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.16px;
+}
+.status_body_phone button {
+  background-color: var(--blue-color);
+  border: 1px solid var(--blue-color);
+  border-radius: 6px;
+  color: var(--white-color);
+  font-size: 14.694px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 5px 19px;
+  cursor: pointer;
+}
+.status_body_phone button img {
+  width: 30px;
+  height: 30px;
+}
+/* ______________Status_body_Icra_______________ */
+.status_body_icra {
+  background-color: var(--metal-color);
+  border-radius: 5px;
+  padding: 16px 25px;
+  margin: 19px 0px 12px 0px;
+}
+/* ________________Status_body__money____________ */
+.status_body_money {
+  background-color: var(--metal-color);
+  border-radius: 5px;
+  padding: 16px 25px;
+  margin: 19px 0px 12px 0px;
+}
+.status_body_money_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.status_body_money_header h3 {
+  color: var(--blue-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 132.5%; /* 23.85px */
+}
+.status_body_money_header h1 {
+  color: red;
+  text-align: right;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.status_body_money_divs {
+  display: flex;
+  justify-content: space-between;
+}
+.status_body_money_divs div p {
+  color: var(--blue-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 8px;
+}
+.status_body_money_div_red {
+  border-radius: 6px;
+  background: var(--red-color);
+  color: var(--white-color);
+  text-align: center;
+  font-size: 20.64px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.243px;
+  height: 61.876px;
+  flex-shrink: 0;
+  padding: 0px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.status_body_money_button {
+  padding: 14px 0px;
+}
+.status_body_money_button button {
+  width: 100%;
+  padding: 15px 0px;
+  color: var(--white-color);
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 6px;
+  background-color: var(--sea-color);
+  border: 1px solid var(--sea-color);
+  cursor: pointer;
+}
+/* __________________ */
+.status_body_buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  padding: 0px 20px;
+  gap: 15px;
+}
+.status_body_buttons button {
+  color: var(--white-color);
+  text-align: center;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 15px 0px;
+  border-radius: 6px;
+}
+.status_body_buttons_red {
+  background-color: var(--red-color);
+  border: 1px solid var(--red-color);
+}
+.status_body_buttons_gray {
+  background-color: #818181;
+  border: 1px solid #818181;
+}
+@media (max-width: 500px) {
+  .status_body_infodiv,
+  .status_body_phone,
+  .status_body_money {
+    padding: 16px 15px;
+  }
+  .status_body_infodiv_divs div {
+    font-size: 14px;
+    padding: 0px 6px;
+    max-width: 75px;
+  }
+  .status_body_infodiv_textdiv {
+    gap: 10px;
+  }
+  .status_body_infodiv_textdiv div h3 {
+    font-size: 17px;
+  }
+  .status_body_infodiv p {
+    font-size: 14px;
+  }
+  .status_body_phone button {
+    font-size: 13px;
+    padding: 5px 15px;
+  }
+  .status_body_phone button img {
+    width: 20px;
+    height: 20px;
+  }
+  .status_body_phone div h2 {
+    font-size: 18px;
+  }
+  .status_body_buttons {
+    padding: 0px 0px;
+  }
+}

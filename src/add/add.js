@@ -71,7 +71,7 @@ function createOverlay() {
   // ____________________________________________________
   const overlayImage = document.createElement("img");
   overlayImage.src = URL.createObjectURL(capturedPhotoBlob);
-  overlayImage.style.width = "300px";
+  overlayImage.style.width = "500px";
   overlayImage.style.height = "auto";
   overlayImage.style.borderRadius = "10px";
   overlayContent.appendChild(overlayImage);
@@ -129,6 +129,7 @@ function closeOverlay() {
 saveButton.addEventListener("click", () => {
   if (selectedImages.length > 0) {
     console.log("Selected Images:", selectedImages);
+    document.querySelector("#multiple_data").value = selectedImages;
     // Burada seçilen görüntüleri sunucuya gönderme işlemini yapabilirsiniz.
     // Örneğin fetch() veya XMLHttpRequest kullanarak POST isteği göndermek.
   } else {

@@ -1,0 +1,16 @@
+.galery_divs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.galery_divs div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 550px) {
+  .galery_divs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

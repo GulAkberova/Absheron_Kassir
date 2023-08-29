@@ -230,6 +230,25 @@
   background-color: #818181;
   border: 1px solid #818181;
 }
+.status_body_icra div {
+  display: flex;
+  justify-content: space-between;
+}
+.status_body_icra div p {
+  color: var(--sea-color);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.status_body_icra div h3 {
+  color: var(--blue-color);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 15px;
+}
 @media (max-width: 500px) {
   .status_body_infodiv,
   .status_body_phone,
@@ -263,5 +282,17 @@
   }
   .status_body_buttons {
     padding: 0px 0px;
+  }
+  .status_body_buttons button {
+    font-size: 18px;
+  }
+  .status_body_icra div h3 {
+    font-size: 17px;
+  }
+  .status_body_header h2 {
+    font-size: 22px;
+  }
+  .status_body_header p {
+    font-size: 18px;
   }
 }

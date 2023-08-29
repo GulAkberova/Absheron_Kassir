@@ -4,8 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./status.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="add.css" />
+    <link rel="stylesheet" href="../status/status.css" />
   </head>
   <body>
     <section class="tm_bigdiv">
@@ -48,12 +56,32 @@
               </div>
             </div>
           </div>
+
+          <div class="status_body_buttons status_body_buttons_end">
+            <button class="status_body_buttons_gray">Açıqdır</button>
+            <button class="status_body_buttons_gray">Bağlıdır</button>
+          </div>
+          <div class="add_body_img">
+            <p>Mağaza şəkili:</p>
+            <div id="cameraContainer">
+              <button id="captureButton">
+                <i class="fa-solid fa-camera"></i>
+              </button>
+              <video id="cameraFeed" style="display: none"></video>
+              <canvas id="canvas" style="display: none"></canvas>
+              <div
+                id="imageContainer"
+                style="display: flex; flex-wrap: wrap"
+              ></div>
+            </div>
+          </div>
+
           <div class="status_body_phone">
             <div>
               <p>Telefon nömrəsi:</p>
-              <h2 id="phoneNumber">+994 50 329 09 99</h2>
+              <h2>+994 50 329 09 68</h2>
             </div>
-            <button id="callButton">
+            <button>
               <img src="../../assets/icon/phone.svg" />
               <p>Zeng et</p>
             </button>
@@ -68,45 +96,15 @@
               <h3>8/24/2023</h3>
             </div>
           </div>
-          <!-- <div class="status_body_money">
-            <div class="status_body_money_header">
-              <h3>Ödənilməli <br />Məbləğ (azn):</h3>
-              <h1>7884</h1>
-            </div>
-            <div class="status_body_money_divs">
-              <div>
-                <p>Ödənilib:</p>
-                <div class="status_body_money_div_red">0</div>
-              </div>
-              <div>
-                <p>Qalıq:</p>
-                <div class="status_body_money_div_red">7884</div>
-              </div>
-              <div>
-                <p>Ödəniş statusu:</p>
-                <div class="status_body_money_div_red">Ödəniş olunmayıb</div>
-              </div>
-            </div>
-            <div class="status_body_money_button">
-              <button>Yeni ödənişi qeyd et</button>
-            </div>
-          </div> -->
           <div class="status_body_buttons">
-            <button class="status_body_buttons_red">Açıqdır</button>
-            <button class="status_body_buttons_gray">Bağlıdır</button>
+            <button class="status_body_buttons_red" id="saveButton">
+              Yadda saxla
+            </button>
+            <button class="status_body_buttons_gray">İmtina et</button>
           </div>
         </div>
       </div>
     </section>
-    <script>
-      const callButton = document.getElementById("callButton");
-      const phoneNumberElement = document.getElementById("phoneNumber");
-
-      callButton.addEventListener("click", () => {
-        const phoneNumber = phoneNumberElement.innerText.replace(/ /g, "");
-        console.log(phoneNumber, "phoneNumber"); // Boşlukları kaldır
-        window.location.href = `tel:${phoneNumber}`;
-      });
-    </script>
+    <script src="./add.js"></script>
   </body>
 </html>

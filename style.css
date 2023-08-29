@@ -259,6 +259,9 @@
   align-items: center;
   padding: 17px 0px;
 }
+.status_header_div a {
+  color: black;
+}
 /* _________________Status_Body_________________ */
 .status_body {
   padding: 23px 0px;

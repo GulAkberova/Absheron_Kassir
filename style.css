@@ -248,6 +248,9 @@
   .list_body_text div {
     gap: 5px;
   }
+  .list_header img {
+    width: 150px;
+  }
 }
 /* ____________________Status____________ */
 .status_header {

@@ -71,7 +71,7 @@ function createOverlay() {
   // ____________________________________________________
   const overlayImage = document.createElement("img");
   overlayImage.src = URL.createObjectURL(capturedPhotoBlob);
-  overlayImage.style.width = "500px";
+  overlayImage.style.width = "300px";
   overlayImage.style.height = "auto";
   overlayImage.style.borderRadius = "10px";
   overlayContent.appendChild(overlayImage);

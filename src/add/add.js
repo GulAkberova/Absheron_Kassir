@@ -129,9 +129,42 @@ function closeOverlay() {
 saveButton.addEventListener("click", () => {
   if (selectedImages.length > 0) {
     console.log("Selected Images:", selectedImages);
-    document.querySelector("#multiple_data").value = selectedImages;
-    // Burada seçilen görüntüleri sunucuya gönderme işlemini yapabilirsiniz.
-    // Örneğin fetch() veya XMLHttpRequest kullanarak POST isteği göndermek.
+    const arr = [];
+
+    // Önce seçilen görüntüleri bir FormData nesnesine ekleyelim
+    const formData = new FormData();
+    selectedImages.forEach((image, index) => {
+      formData.append(`image_${index}`, image.blob, `image_${index}.png`);
+    });
+
+    // FormData içeriğini kontrol et
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+      arr.push(value);
+    }
+    console.log(arr);
+    console.log(formData.values(), "formData");
+    // Fetch ile POST isteği gönderme
+    fetch("http://localhost:5137/admin/ShopRepo/Edit", {
+      method: "POST",
+      body: arr,
+      headers: {
+        // Bu satır Content-Type'ı elle ayarlar
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Gönderme başarılı.", response);
+          // Burada başarılı bir şekilde gönderildiğini belirten işlemleri yapabilirsiniz.
+        } else {
+          console.error("Gönderme başarısız.");
+          // Gönderme başarısızsa uygun işlemleri yapabilirsiniz.
+        }
+      })
+      .catch((error) => {
+        console.error("Bir hata oluştu:", error);
+      });
   } else {
     console.log("No images selected.");
   }

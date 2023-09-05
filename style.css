@@ -480,6 +480,9 @@
   padding: 15px 0px;
   border-radius: 6px;
 }
+.status_body_buttons a button {
+  width: 100%;
+}
 .status_body_buttons_red {
   background-color: var(--red-color);
   border: 1px solid var(--red-color);

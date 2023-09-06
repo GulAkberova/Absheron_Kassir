@@ -18,7 +18,22 @@
   --gray-color: rgba(129, 129, 129, 0.5);
   --metal-color: #ece9e9;
 }
-
+.sea_color {
+  border: 1px solid var(--sea-color);
+  background: var(--sea-color);
+}
+.green_color {
+  border: 1px solid var(--green-color);
+  background: var(--green-color);
+}
+.red_color {
+  border: 1px solid var(--red-color);
+  background: var(--red-color);
+}
+.black_color {
+  border: 1px solid var(--black-color);
+  background: var(--black-color);
+}
 .container {
   max-width: 800px;
   margin: auto;
@@ -268,6 +283,76 @@
     margin-bottom: 7px;
   }
 }
+/* ___________________________Magazine_________________ */
+.magazine_div img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.magazine_text_ul {
+  padding: 7px 0px;
+}
+.magazine_text_ul li,
+.magazine_text_end p {
+  color: #5d5d6d;
+  font-size: 12.662px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16.794px; /* 297.12% */
+  letter-spacing: -0.033px;
+  margin-bottom: 7px;
+}
+.magazine_text_ul li b,
+.magazine_text_end p {
+  color: var(--blue-color);
+}
+.magazine_text_end {
+  display: flex;
+  gap: 2px;
+  justify-content: space-between;
+}
+.magazine_text_end div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+.magazine_text_end div button {
+  color: #fff;
+  text-align: center;
+  font-size: 10.289px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 8.114px; /* 189.167% */
+  letter-spacing: -0.021px;
+  padding: 3px 3px;
+  border-radius: 0.705px;
+}
+.magazine_name_color {
+  color: var(--mor-color) !important;
+}
+@media (max-width: 670px) {
+  .magazine_div {
+    padding: 10px;
+  }
+}
+@media (max-width: 500px) {
+  .magazine_div img {
+    height: 100px;
+  }
+  .magazine_text_ul li,
+  .magazine_text_end p {
+    font-size: 11.662px;
+  }
+  .magazine_text_end div button {
+    font-size: 8.289px;
+    padding: 3px 1px;
+  }
+  .magazine_text_end {
+    flex-direction: column;
+  }
+}
 /* __________________________List_______________ */
 .list_body {
   padding: 23px 0px;
@@ -327,22 +412,7 @@
   line-height: 22.7px; /* 126.111% */
   letter-spacing: -0.09px;
 }
-.sea_color {
-  border: 1px solid var(--sea-color);
-  background: var(--sea-color);
-}
-.green_color {
-  border: 1px solid var(--green-color);
-  background: var(--green-color);
-}
-.red_color {
-  border: 1px solid var(--red-color);
-  background: var(--red-color);
-}
-.black_color {
-  border: 1px solid var(--black-color);
-  background: var(--black-color);
-}
+
 @media (max-width: 768px) {
   .rwd_list_body_textdiv {
     flex-direction: column;

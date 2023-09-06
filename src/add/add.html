@@ -15,12 +15,20 @@
   </head>
   <body>
     <section class="tm_bigdiv">
-      <header class="status_header">
+      <header class="list_header">
         <div class="container">
-          <div class="status_header_div">
-            <img src="../../assets/icon/left.svg" />
-            <h3>Mağaza Siyahısı</h3>
-            <p></p>
+          <div class="list_header_div">
+            <img src="../../assets/logo/logo.svg" class="list_header_img" />
+            <div class="list_header_div_text">
+              <div>
+                <img src="../../assets/icon/header/magazine.svg" />
+                <a href="#">Mağazalar</a>
+              </div>
+              <div>
+                <img src="../../assets/icon/header/check.svg" />
+                <a href="../add/add.html">Hesabat</a>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -28,15 +36,26 @@
         <div class="container">
           <div class="status_body_header">
             <h2>Bügün</h2>
-            <p>8/24/2023</p>
+            <div>
+              <p>8/24/2023</p>
+              <a href="#">
+                <img src="../../assets/icon/header/right.svg" />
+              </a>
+            </div>
           </div>
           <div class="status_body_infodiv">
+            <div class="status_body_sectordiv">
+              <p>Sektor:</p>
+              <h3>Tikinti materialları</h3>
+            </div>
             <p>Mağaza ünvanı:</p>
             <div class="status_body_infodiv_divs">
-              <div>99 Sıra</div>
-              <div>Prestij B</div>
-              <div>99 Mağaza</div>
-              <div>400 Sahə M2</div>
+              <div>99<span>Sıra</span></div>
+              <div>Prestij B<span>Korpus</span></div>
+              <div>99 <span>Mağaza</span></div>
+              <div class="status_body_infodiv_divs_blue">
+                400 <span>Sahə M2</span>
+              </div>
             </div>
             <div class="status_body_infodiv_textdiv">
               <div>
@@ -78,9 +97,9 @@
           <div class="status_body_phone">
             <div>
               <p>Telefon nömrəsi:</p>
-              <h2>+994 50 329 09 68</h2>
+              <h2 id="phoneNumber">+994 50 329 09 99</h2>
             </div>
-            <button>
+            <button id="callButton">
               <img src="../../assets/icon/phone.svg" />
               <p>Zeng et</p>
             </button>
@@ -107,5 +126,15 @@
       </div>
     </section>
     <script src="./add.js"></script>
+    <script>
+      const callButton = document.getElementById("callButton");
+      const phoneNumberElement = document.getElementById("phoneNumber");
+
+      callButton.addEventListener("click", () => {
+        const phoneNumber = phoneNumberElement.innerText.replace(/ /g, "");
+        console.log(phoneNumber, "phoneNumber"); // Boşlukları kaldır
+        window.location.href = `tel:${phoneNumber}`;
+      });
+    </script>
   </body>
 </html>

@@ -353,8 +353,50 @@
     flex-direction: column;
   }
 }
+/* _______________________Calendara________________ */
+#open-calendar-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.modal_header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
 
 /* _________________________Report___________________ */
+
 .report_daydiv {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -388,7 +430,8 @@
 @media (max-width: 600px) {
   .report_daydiv div button,
   .report_daydiv_m button {
-    font-size: 35px;
+    font-size: 25px;
+    line-height: 73.308px; /* 252.222% */
   }
 }
 .report_daydiv div:nth-of-type(2) button {
@@ -429,6 +472,11 @@
   line-height: normal;
   letter-spacing: -0.135px;
 }
+@media (max-width: 430px) {
+  .report_rwd {
+    grid-template-columns: 1fr;
+  }
+}
 /* _____________________Area_______________________ */
 .area_bigdiv {
   border-radius: 6px;
@@ -457,6 +505,38 @@
   font-weight: 400;
   line-height: 14.445px; /* 120.379% */
   letter-spacing: -0.06px;
+}
+
+/* __________________________Week_________________ */
+.week_chart_bigdiv {
+  margin: 30px 0px;
+  border-radius: 6px;
+}
+.week_chart_div {
+  padding: 20px 10px;
+  background: #f8f8f8;
+  border: 1px solid rgba(132, 130, 130, 0.413);
+}
+.week_chart_btns {
+  display: flex;
+}
+.week_chart_btns button {
+  padding: 3px 35px;
+  background: white;
+  border-bottom: none;
+  cursor: pointer;
+}
+.week_chart_btns button:nth-of-type(1) {
+  border-top-left-radius: 5px;
+
+  border: 1px solid rgba(128, 128, 128, 0.397);
+  border-right: none;
+}
+.week_chart_btns button:nth-of-type(2) {
+  border-top-right-radius: 5px;
+
+  border: 1px solid rgba(128, 128, 128, 0.397);
+  border-left: none;
 }
 /* __________________________List_______________ */
 .list_body {
@@ -874,6 +954,10 @@
     font-size: 22px;
   }
   .status_body_header p {
+    font-size: 14px !important;
+  }
+  .report_wm_div div a,
+  .report_maindiv h2 {
     font-size: 18px;
   }
 }

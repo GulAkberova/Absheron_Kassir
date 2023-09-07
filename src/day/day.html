@@ -34,6 +34,22 @@
             </div>
             <div>
               <p>8/24/2023</p>
+              <button id="open-calendar-button">
+                <img src="../../assets/icon/header/calendar.svg" />
+              </button>
+              <!-- _________________________Calendar_________________ -->
+              <div id="calendar-modal" class="modal">
+                <div class="modal-content">
+                  <div class="modal_header">
+                    <h3>Takvim</h3>
+
+                    <span class="close" id="close-calendar">&times;</span>
+                  </div>
+                  <div class="calendar_div"></div>
+                </div>
+              </div>
+
+              <!-- _________________________________________ -->
               <a href="#">
                 <img src="../../assets/icon/header/right.svg" />
               </a>
@@ -85,7 +101,7 @@
               <p>Sahə m2</p>
               <button>96857</button>
             </div>
-            <div class="report_daydiv">
+            <div class="report_daydiv report_rwd">
               <div>
                 <p>Fəaliyyət sahəsi:</p>
                 <a href="../area/area.html">
@@ -107,5 +123,27 @@
         </div>
       </div>
     </section>
+    <script>
+      const openCalendarButton = document.getElementById(
+        "open-calendar-button"
+      );
+      const calendarModal = document.getElementById("calendar-modal");
+      const closeCalendarButton = document.getElementById("close-calendar");
+
+      openCalendarButton.addEventListener("click", () => {
+        calendarModal.style.display = "block"; // Takvim penceresini görünür hale getirin
+      });
+
+      closeCalendarButton.addEventListener("click", () => {
+        calendarModal.style.display = "none"; // Takvim penceresini gizleyin
+      });
+
+      // Eğer kullanıcı dışarıya tıklarsa da pencereyi kapatmak için aşağıdaki kodu kullanabilirsiniz:
+      window.addEventListener("click", (event) => {
+        if (event.target === calendarModal) {
+          calendarModal.style.display = "none"; // Takvim penceresini gizleyin
+        }
+      });
+    </script>
   </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../../style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <section class="tm_bigdiv">
@@ -33,7 +34,7 @@
               <h2>Bu həftə</h2>
             </div>
             <div>
-              <p> 8/24/2023 -  8/24/2023 </8></p>
+              <p>8/24/2023 - 8/24/2023</p>
               <a href="#">
                 <img src="../../assets/icon/header/right.svg" />
               </a>
@@ -47,6 +48,16 @@
             <div>
               <p>Bağlı:</p>
               <button>89</button>
+            </div>
+          </div>
+
+          <div class="week_chart_bigdiv">
+            <div class="week_chart_btns">
+              <button id="chart1-button">Açıq</button>
+              <button id="chart2-button">Bağlı</button>
+            </div>
+            <div class="week_chart_div">
+              <canvas id="chart-area" width="400" height="200"></canvas>
             </div>
           </div>
           <div class="report_wm_div">
@@ -85,7 +96,7 @@
               <p>Sahə m2</p>
               <button>96857</button>
             </div>
-            <div class="report_daydiv">
+            <div class="report_daydiv report_rwd">
               <div>
                 <p>Fəaliyyət sahəsi:</p>
                 <a href="../area/area.html">
@@ -107,5 +118,87 @@
         </div>
       </div>
     </section>
+
+    <script>
+      const chart1Data = {
+        labels: [
+          "Pazartesi",
+          "Salı",
+          "Çarşamba",
+          "Perşembe",
+          "Cuma",
+          "Cumartesi",
+          "Pazar",
+        ],
+        datasets: [
+          {
+            label: "Açıq",
+            data: [12, 19, 3, 5, 2, 3, 10], // Veri noktalarını buraya ekleyin
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 2,
+            fill: false,
+          },
+        ],
+      };
+
+      const chart2Data = {
+        labels: [
+          "Pazartesi",
+          "Salı",
+          "Çarşamba",
+          "Perşembe",
+          "Cuma",
+          "Cumartesi",
+          "Pazar",
+        ],
+        datasets: [
+          {
+            label: "Bağlı",
+            data: [30, 45, 60, 22, 80, 65, 50], // Veri noktalarını buraya ekleyin
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 2,
+            fill: false,
+          },
+        ],
+      };
+
+      const ctx = document.getElementById("chart-area").getContext("2d");
+      let currentChart = null;
+
+      function createChart(data) {
+        if (currentChart) {
+          currentChart.destroy(); // Mevcut grafik varsa önceki grafik silinir
+        }
+
+        currentChart = new Chart(ctx, {
+          type: "line", // Grafiğin türünü burada belirleyebilirsiniz (örneğin, 'bar' veya 'pie')
+          data: data,
+          options: {
+            // Grafiğin ayarları burada belirleyebilirsiniz
+          },
+        });
+      }
+      // İlk olarak düğmeleri tanımlayın
+      const chart1Button = document.getElementById("chart1-button");
+      const chart2Button = document.getElementById("chart2-button");
+      chart1Button.style.backgroundColor = "#e2dfdf44";
+      chart1Button.style.borderRight = "1px solid rgba(129, 129, 129, 0.5)"; // Örnek bir stil değişikliği
+
+      chart1Button.addEventListener("click", () => {
+        createChart(chart1Data);
+        chart1Button.style.backgroundColor = "#e2dfdf44";
+        chart1Button.style.borderRight = "1px solid rgba(129, 129, 129, 0.5)"; // Örnek bir stil değişikliği
+        chart2Button.style.backgroundColor = ""; // Diğer düğmenin stili sıfırlanır
+      });
+
+      chart2Button.addEventListener("click", () => {
+        createChart(chart2Data);
+        chart2Button.style.backgroundColor = "#e2dfdf44"; // Örnek bir stil değişikliği
+        chart1Button.style.backgroundColor = "";
+      });
+
+      // Başlangıçta ilk grafik oluşturulur
+      createChart(chart1Data);
+    </script>
   </body>
 </html>

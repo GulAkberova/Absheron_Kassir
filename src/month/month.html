@@ -4,6 +4,153 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
-  <body></body>
+  <body>
+    <section class="tm_bigdiv">
+      <header class="list_header">
+        <div class="container">
+          <div class="list_header_div">
+            <img src="../../assets/logo/logo.svg" class="list_header_img" />
+            <div class="list_header_div_text">
+              <div>
+                <img src="../../assets/icon/header/magazine.svg" />
+                <a href="#">Mağazalar</a>
+              </div>
+              <div>
+                <img src="../../assets/icon/header/check.svg" />
+                <a href="#">Hesabat</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="list_body">
+        <div class="container">
+          <div class="status_body_header">
+            <div>
+              <img src="../../assets/icon/header/day.svg" />
+              <h2>Bu ay</h2>
+            </div>
+            <div>
+              <p>8/24/2023 - 8/24/2023</p>
+              <a href="#">
+                <img src="../../assets/icon/header/right.svg" />
+              </a>
+            </div>
+          </div>
+
+          <div class="week_chart_bigdiv">
+            <div class="week_chart_div">
+              <canvas id="chart-area" width="400" height="200"></canvas>
+            </div>
+          </div>
+          <div class="report_wm_div">
+            <div>
+              <img src="../../assets/icon/header/day.svg" />
+              <a href="../day/day.html">Bu gün</a>
+            </div>
+            <div>
+              <img src="../../assets/icon/header/week.svg" />
+              <a href="../week/week.html">Bu Həftə</a>
+            </div>
+          </div>
+          <div class="report_maindiv">
+            <h2>Ümümi vəziyyət</h2>
+            <div class="report_daydiv">
+              <div>
+                <p>Mağaza sayı:</p>
+                <button>1781</button>
+              </div>
+              <div>
+                <p>Korpus sayı:</p>
+                <button>82</button>
+              </div>
+            </div>
+            <div class="report_daydiv">
+              <div>
+                <p>Icarədə:</p>
+                <button>189</button>
+              </div>
+              <div>
+                <p>Boş:</p>
+                <button>56</button>
+              </div>
+            </div>
+            <div class="report_daydiv_m">
+              <p>Sahə m2</p>
+              <button>96857</button>
+            </div>
+            <div class="report_daydiv report_rwd">
+              <div>
+                <p>Fəaliyyət sahəsi:</p>
+                <a href="../area/area.html">
+                  <button>
+                    50 <img src="../../assets/icon/header/more.svg" />
+                  </button>
+                </a>
+              </div>
+              <div>
+                <p>Fəaliyyət kategoriyasi:</p>
+                <a href="../category/category.html">
+                  <button>
+                    18<img src="../../assets/icon/header/more.svg" />
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const chart1Data = {
+        labels: [
+          "Yanvar",
+          "Fevral",
+          "Mart",
+          "Aprel",
+          "May",
+          "İyun",
+          "İyul",
+          "Avqust",
+          "Sentyabr",
+          "Oktyabr",
+          "Noyabr",
+          "Dekabr",
+        ],
+        datasets: [
+          {
+            label: "Açıq",
+            data: [12, 19, 3, 5, 2, 3, 10], // Veri noktalarını buraya ekleyin
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 2,
+            fill: false,
+          },
+        ],
+      };
+
+      const ctx = document.getElementById("chart-area").getContext("2d");
+      let currentChart = null;
+
+      function createChart(data) {
+        if (currentChart) {
+          currentChart.destroy(); // Mevcut grafik varsa önceki grafik silinir
+        }
+
+        currentChart = new Chart(ctx, {
+          type: "line", // Grafiğin türünü burada belirleyebilirsiniz (örneğin, 'bar' veya 'pie')
+          data: data,
+          options: {
+            // Grafiğin ayarları burada belirleyebilirsiniz
+          },
+        });
+      }
+
+      // Başlangıçta ilk grafik oluşturulur
+      createChart(chart1Data);
+    </script>
+  </body>
 </html>

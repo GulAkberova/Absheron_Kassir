@@ -34,13 +34,15 @@
   border: 1px solid var(--black-color);
   background: var(--black-color);
 }
-.container {
+.container,
+.container_main {
   max-width: 800px;
   margin: auto;
   padding: 0px 25px;
 }
 @media (max-width: 550px) {
-  .container {
+  .container,
+  .container_main {
     padding: 0px 15px;
   }
 }
@@ -371,12 +373,16 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.modal_content {
   background-color: #fff;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
 }
 .modal_header {
   width: 100%;
@@ -393,6 +399,25 @@
 
 .close:hover {
   color: black;
+}
+.calendar_div {
+  padding: 20px 0px;
+  width: 100%;
+}
+
+.calendar_div form button {
+  border: 1px solid var(--sea-color);
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: var(--sea-color);
+  background-color: var(--white-color);
+  margin-top: 10px;
+}
+.form_control {
+  border: 1px solid rgba(128, 128, 128, 0.354);
+  width: 350px !important;
+  padding: 10px 5px;
+  border-radius: 5px;
 }
 
 /* _________________________Report___________________ */

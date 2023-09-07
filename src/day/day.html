@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../../style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <section class="tm_bigdiv">
       <header class="list_header">
-        <div class="container">
+        <div class="container_main">
           <div class="list_header_div">
             <img src="../../assets/logo/logo.svg" class="list_header_img" />
             <div class="list_header_div_text">
@@ -26,7 +32,7 @@
         </div>
       </header>
       <div class="list_body">
-        <div class="container">
+        <div class="container_main">
           <div class="status_body_header">
             <div>
               <img src="../../assets/icon/header/day.svg" />
@@ -37,15 +43,21 @@
               <button id="open-calendar-button">
                 <img src="../../assets/icon/header/calendar.svg" />
               </button>
-              <!-- _________________________Calendar_________________ -->
-              <div id="calendar-modal" class="modal">
-                <div class="modal-content">
-                  <div class="modal_header">
-                    <h3>Takvim</h3>
 
-                    <span class="close" id="close-calendar">&times;</span>
+              <!-- _________________________Calendar_________________ -->
+              <div id="calendar_modal" class="modal">
+                <div class="modal_content">
+                  <div class="modal_header">
+                    <h3>Calendar</h3>
+
+                    <span class="close" id="close_calendar">&times;</span>
                   </div>
-                  <div class="calendar_div"></div>
+                  <div class="calendar_div">
+                    <form>
+                      <input type="date" class="form_control" /><br />
+                      <button>Gonder</button>
+                    </form>
+                  </div>
                 </div>
               </div>
 
@@ -123,12 +135,17 @@
         </div>
       </div>
     </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
     <script>
       const openCalendarButton = document.getElementById(
         "open-calendar-button"
       );
-      const calendarModal = document.getElementById("calendar-modal");
-      const closeCalendarButton = document.getElementById("close-calendar");
+      const calendarModal = document.getElementById("calendar_modal");
+      const closeCalendarButton = document.getElementById("close_calendar");
 
       openCalendarButton.addEventListener("click", () => {
         calendarModal.style.display = "block"; // Takvim penceresini görünür hale getirin

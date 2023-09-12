@@ -73,55 +73,64 @@
               </div>
             </div>
           </div>
-
-          <div class="status_body_buttons status_body_buttons_end">
-            <button class="status_body_buttons_gray">Açıqdır</button>
-            <button class="status_body_buttons_gray">Bağlıdır</button>
-          </div>
-          <div class="add_body_img">
-            <p>Mağaza şəkili:</p>
-            <div id="cameraContainer">
-              <input id="multiple_data" multiple style="display: none" />
-              <button id="captureButton">
-                <i class="fa-solid fa-camera"></i>
+          <form method="post" enctype="multipart/form-data">
+            <div class="status_body_buttons status_body_buttons_end">
+              <button type="button" class="status_body_buttons_gray">
+                Açıqdır
               </button>
-              <video id="cameraFeed" style="display: none"></video>
-              <canvas id="canvas" style="display: none"></canvas>
-              <div
-                id="imageContainer"
-                style="display: flex; flex-wrap: wrap"
-              ></div>
+              <button type="button" class="status_body_buttons_gray">
+                Bağlıdır
+              </button>
             </div>
-          </div>
+            <div class="add_body_img">
+              <p>Mağaza şəkili:</p>
+              <div id="cameraContainer">
+                <input id="multiple_data" multiple style="display: none" />
+                <button type="button" id="captureButton">
+                  <i class="fa-solid fa-camera"></i>
+                </button>
+                <video id="cameraFeed" style="display: none"></video>
+                <canvas id="canvas" style="display: none"></canvas>
+                <div
+                  id="imageContainer"
+                  style="display: flex; flex-wrap: wrap"
+                ></div>
+              </div>
+            </div>
 
-          <div class="status_body_phone">
-            <div>
-              <p>Telefon nömrəsi:</p>
-              <h2 id="phoneNumber">+994 50 329 09 99</h2>
+            <div class="status_body_phone">
+              <div>
+                <p>Telefon nömrəsi:</p>
+                <h2 id="phoneNumber">+994 50 329 09 99</h2>
+              </div>
+              <button id="callButton">
+                <img src="../../assets/icon/phone.svg" />
+                <p>Zeng et</p>
+              </button>
             </div>
-            <button id="callButton">
-              <img src="../../assets/icon/phone.svg" />
-              <p>Zeng et</p>
-            </button>
-          </div>
-          <div class="status_body_icra">
-            <div>
-              <p>İcra vəziyyəti:</p>
-              <p>İcarəyə verildiyi tarix:</p>
+            <div class="status_body_icra">
+              <div>
+                <p>İcra vəziyyəti:</p>
+                <p>İcarəyə verildiyi tarix:</p>
+              </div>
+              <div>
+                <h3>İcarəyə verilib</h3>
+                <h3>8/24/2023</h3>
+              </div>
             </div>
-            <div>
-              <h3>İcarəyə verilib</h3>
-              <h3>8/24/2023</h3>
+            <div class="status_body_buttons">
+              <button
+                type="submit"
+                class="status_body_buttons_red"
+                id="saveButton"
+              >
+                Yadda saxla
+              </button>
+              <a href="#">
+                <button class="status_body_buttons_gray">İmtina et</button>
+              </a>
             </div>
-          </div>
-          <div class="status_body_buttons">
-            <button class="status_body_buttons_red" id="saveButton">
-              Yadda saxla
-            </button>
-            <a href="#">
-              <button class="status_body_buttons_gray">İmtina et</button>
-            </a>
-          </div>
+          </form>
         </div>
       </div>
     </section>

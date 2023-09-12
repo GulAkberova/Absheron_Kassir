@@ -6,6 +6,9 @@ const saveButton = document.getElementById("saveButton");
 let selectedImages = [];
 
 let facingMode = "environment"; // Başlangıçta arka kamera
+// URL'den id'yi al
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
 
 captureButton.addEventListener("click", async () => {
   try {
@@ -125,11 +128,32 @@ function closeOverlay() {
     document.body.removeChild(overlayContainer);
   }
 }
+// ______________________Buttons____________________
+let statuss = false;
+// Buttons olay dinleyicilerini ekle
+const buttons = document.querySelectorAll(".status_body_buttons_end button");
+
+buttons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    // Tüm düğmeleri gri yap
+    buttons.forEach((btn) => {
+      btn.classList.remove("status_body_buttons_red");
+      btn.classList.add("status_body_buttons_gray");
+    });
+
+    // Seçilen düğmeyi kırmızı yap ve status'u güncelle
+    button.classList.remove("status_body_buttons_gray");
+    button.classList.add("status_body_buttons_red");
+
+    // Status'u güncelle (true veya false)
+    statuss = index === 0; // İlk düğme tıklanırsa status true, ikinci düğme tıklanırsa status false
+    console.log("Status:", statuss);
+  });
+});
 
 saveButton.addEventListener("click", () => {
   if (selectedImages.length > 0) {
     console.log("Selected Images:", selectedImages);
-    const arr = [];
 
     // Önce seçilen görüntüleri bir FormData nesnesine ekleyelim
     const formData = new FormData();
@@ -137,20 +161,19 @@ saveButton.addEventListener("click", () => {
       formData.append(`image_${index}`, image.blob, `image_${index}.png`);
     });
 
-    // FormData içeriğini kontrol et
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-      arr.push(value);
-    }
-    console.log(arr);
-    console.log(formData.values(), "formData");
+    // JSON verileri oluştur
+    const jsonData = {
+      photos: selectedImages, // Buraya seçilen görüntüleri ekleyin
+      status: statuss, // Seçilen status'u ekleyin
+    };
+    console.log(jsonData);
+
     // Fetch ile POST isteği gönderme
-    fetch("http://localhost:5137/admin/ShopRepo/Edit", {
-      method: "POST",
-      body: arr,
+    fetch(`https://cms.absherontm.az/api/admin/ShopRepo/Shops/Edit/${id}`, {
+      method: "PUT", // PUT isteği kullanabilirsiniz
+      body: JSON.stringify(jsonData), // JSON verileri gönderin
       headers: {
-        // Bu satır Content-Type'ı elle ayarlar
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json", // JSON verisi gönderiyoruz
       },
     })
       .then((response) => {
@@ -168,19 +191,4 @@ saveButton.addEventListener("click", () => {
   } else {
     console.log("No images selected.");
   }
-});
-
-// ______________________Buttons____________________
-
-const buttons = document.querySelectorAll(".status_body_buttons_end button");
-
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    buttons.forEach((btn) => {
-      btn.classList.remove("status_body_buttons_red");
-      btn.classList.add("status_body_buttons_gray");
-    });
-    button.classList.remove("status_body_buttons_gray");
-    button.classList.add("status_body_buttons_red");
-  });
 });

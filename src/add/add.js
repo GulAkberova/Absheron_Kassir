@@ -89,14 +89,15 @@ function createOverlay() {
   addButton.textContent = "Yadda saxla";
   addButton.addEventListener("click", () => {
     const currentTime = new Date(); // Şu anki tarih ve saat
-    const imageData = {
-      blob: capturedPhotoBlob,
-      timestamp: currentTime.toISOString(), // Tarih ve saat ISO 8601 formatında
-    };
-    imageContainer.appendChild(createThumbnail(capturedPhotoBlob));
-    selectedImages.push(imageData);
+    const blob = capturedPhotoBlob;
+    const fileName = currentTime.toISOString() + ".jpg"; // Generate a unique filename using the timestamp
+    const imageFile = new File([blob], fileName, { type: "image/jpeg" }); // Create a File object
+
+    imageContainer.appendChild(createThumbnail(blob)); // Display the thumbnail using the original Blob
+    selectedImages.push(imageFile); // Add the image data with the File object to the array
     closeOverlay();
   });
+  console.log(selectedImages, "selectedImages");
   overlayBtn.appendChild(addButton);
   //   ____________________________________________________________
 
@@ -139,6 +140,7 @@ buttons.forEach((button, index) => {
     buttons.forEach((btn) => {
       btn.classList.remove("status_body_buttons_red");
       btn.classList.add("status_body_buttons_gray");
+      console.log(btn);
     });
 
     // Seçilen düğmeyi kırmızı yap ve status'u güncelle
@@ -150,17 +152,24 @@ buttons.forEach((button, index) => {
     console.log("Status:", statuss);
   });
 });
+const arr = [];
 
 saveButton.addEventListener("click", () => {
   if (selectedImages.length > 0) {
     console.log("Selected Images:", selectedImages);
 
     // Önce seçilen görüntüleri bir FormData nesnesine ekleyelim
-    const formData = new FormData();
-    selectedImages.forEach((image, index) => {
-      formData.append(`image_${index}`, image.blob, `image_${index}.png`);
-    });
+    // const formData = new FormData();
+    // selectedImages.forEach((image, index) => {
+    //   formData.append(`image_${index}`, image.blob, `image_${index}.png`);
+    // });
 
+    // FormData içeriğini kontrol et
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(value);
+    //   arr.push(value);
+    // }
+    // console.log(arr);
     // JSON verileri oluştur
     const jsonData = {
       photos: selectedImages, // Buraya seçilen görüntüleri ekleyin
@@ -169,14 +178,15 @@ saveButton.addEventListener("click", () => {
     console.log(jsonData);
 
     // Fetch ile POST isteği gönderme
-    fetch(`https://cms.absherontm.az/api/admin/ShopRepo/Shops/Edit/${id}`, {
-      method: "PUT", // PUT isteği kullanabilirsiniz
-      body: JSON.stringify(jsonData), // JSON verileri gönderin
+    fetch(`http://localhost:5137/api/admin/shoprepo/shops/update/10`, {
+      method: "POST", // PUT isteği kullanabilirsiniz
+      body: jsonData, // JSON verileri gönderin
       headers: {
         "Content-Type": "application/json", // JSON verisi gönderiyoruz
       },
     })
       .then((response) => {
+        console.log(response, "response");
         if (response.ok) {
           console.log("Gönderme başarılı.", response);
           // Burada başarılı bir şekilde gönderildiğini belirten işlemleri yapabilirsiniz.

@@ -73,12 +73,13 @@
               </div>
             </div>
           </div>
-          <form method="post" enctype="multipart/form-data">
+
+          <form method="PUT">
             <div class="status_body_buttons status_body_buttons_end">
-              <button type="button" class="status_body_buttons_gray">
+              <button class="status_body_buttons_gray" type="button">
                 Açıqdır
               </button>
-              <button type="button" class="status_body_buttons_gray">
+              <button class="status_body_buttons_gray" type="button">
                 Bağlıdır
               </button>
             </div>
@@ -86,7 +87,7 @@
               <p>Mağaza şəkili:</p>
               <div id="cameraContainer">
                 <input id="multiple_data" multiple style="display: none" />
-                <button type="button" id="captureButton">
+                <button id="captureButton" type="button">
                   <i class="fa-solid fa-camera"></i>
                 </button>
                 <video id="cameraFeed" style="display: none"></video>
@@ -97,40 +98,36 @@
                 ></div>
               </div>
             </div>
-
-            <div class="status_body_phone">
-              <div>
-                <p>Telefon nömrəsi:</p>
-                <h2 id="phoneNumber">+994 50 329 09 99</h2>
-              </div>
-              <button id="callButton">
-                <img src="../../assets/icon/phone.svg" />
-                <p>Zeng et</p>
-              </button>
-            </div>
-            <div class="status_body_icra">
-              <div>
-                <p>İcra vəziyyəti:</p>
-                <p>İcarəyə verildiyi tarix:</p>
-              </div>
-              <div>
-                <h3>İcarəyə verilib</h3>
-                <h3>8/24/2023</h3>
-              </div>
-            </div>
-            <div class="status_body_buttons">
-              <button
-                type="submit"
-                class="status_body_buttons_red"
-                id="saveButton"
-              >
-                Yadda saxla
-              </button>
-              <a href="#">
-                <button class="status_body_buttons_gray">İmtina et</button>
-              </a>
-            </div>
           </form>
+
+          <div class="status_body_phone">
+            <div>
+              <p>Telefon nömrəsi:</p>
+              <h2 id="phoneNumber">+994 50 329 09 99</h2>
+            </div>
+            <button id="callButton">
+              <img src="../../assets/icon/phone.svg" />
+              <p>Zeng et</p>
+            </button>
+          </div>
+          <div class="status_body_icra">
+            <div>
+              <p>İcra vəziyyəti:</p>
+              <p>İcarəyə verildiyi tarix:</p>
+            </div>
+            <div>
+              <h3>İcarəyə verilib</h3>
+              <h3>8/24/2023</h3>
+            </div>
+          </div>
+          <div class="status_body_buttons">
+            <button class="status_body_buttons_red" id="saveButton">
+              Yadda saxla
+            </button>
+            <a href="#">
+              <button class="status_body_buttons_gray">İmtina et</button>
+            </a>
+          </div>
         </div>
       </div>
     </section>

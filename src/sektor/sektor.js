@@ -4,9 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // API'den verileri çekmek için bir işlev
   async function fetchData() {
     try {
-      const response = await fetch(
-        "https://cms.absherontm.az/api/admin/ShopRepo/"
-      );
+      const response = await fetch("http://localhost:5137/api/admin/ShopRepo/");
       if (!response.ok) {
         throw new Error("API isteği başarısız oldu.");
       }

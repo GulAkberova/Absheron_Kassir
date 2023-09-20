@@ -92,9 +92,9 @@ function createOverlay() {
     const blob = capturedPhotoBlob;
     const fileName = currentTime.toISOString() + ".jpg"; // Generate a unique filename using the timestamp
     const imageFile = new File([blob], fileName, { type: "image/jpeg" }); // Create a File object
-
+    console.log(imageFile, "imageFile");
     imageContainer.appendChild(createThumbnail(blob)); // Display the thumbnail using the original Blob
-    selectedImages.push(imageFile); // Add the image data with the File object to the array
+    selectedImages.push(createThumbnail2(blob)); // Add the image data with the File object to the array
     closeOverlay();
   });
   console.log(selectedImages, "selectedImages");
@@ -116,6 +116,15 @@ function createThumbnail(blob) {
   thumbnail.src = URL.createObjectURL(blob);
   thumbnail.style.width = "80px";
   thumbnail.style.height = "80px";
+  thumbnail.style.objectFit = "cover";
+  thumbnail.style.margin = "5px";
+  return thumbnail;
+}
+function createThumbnail2(blob) {
+  const thumbnail = document.createElement("img");
+  thumbnail.src = URL.createObjectURL(blob);
+  thumbnail.style.width = "800px";
+  thumbnail.style.height = "6000px";
   thumbnail.style.objectFit = "cover";
   thumbnail.style.margin = "5px";
   return thumbnail;
@@ -163,7 +172,7 @@ saveButton.addEventListener("click", () => {
     // selectedImages.forEach((image, index) => {
     //   formData.append(`image_${index}`, image.blob, `image_${index}.png`);
     // });
-
+    // formData.append(statuss);
     // FormData içeriğini kontrol et
     // for (let [key, value] of formData.entries()) {
     //   console.log(value);
@@ -171,6 +180,7 @@ saveButton.addEventListener("click", () => {
     // }
     // console.log(arr);
     // JSON verileri oluştur
+
     const jsonData = {
       photos: selectedImages, // Buraya seçilen görüntüleri ekleyin
       status: statuss, // Seçilen status'u ekleyin
@@ -178,27 +188,44 @@ saveButton.addEventListener("click", () => {
     console.log(jsonData);
 
     // Fetch ile POST isteği gönderme
-    fetch(`http://localhost:5137/api/admin/shoprepo/shops/update/10`, {
-      method: "POST", // PUT isteği kullanabilirsiniz
-      body: jsonData, // JSON verileri gönderin
-      headers: {
-        "Content-Type": "application/json", // JSON verisi gönderiyoruz
+    //     fetch(`http://localhost:5137/api/admin/shoprepo/shops/update/10`, {
+    //       method: "POST", // PUT isteği kullanabilirsiniz
+    //       body: jsonData, // JSON verileri gönderin
+    //       headers: {
+    //         "Content-Type": "application/json", // JSON verisi gönderiyoruz
+    //       },
+    //     })
+    //       .then((response) => {
+    //         console.log(response, "response");
+    //         if (response.ok) {
+    //           console.log("Gönderme başarılı.", response);
+    //           // Burada başarılı bir şekilde gönderildiğini belirten işlemleri yapabilirsiniz.
+    //         } else {
+    //           console.error("Gönderme başarısız.");
+    //           // Gönderme başarısızsa uygun işlemleri yapabilirsiniz.
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         console.error("Bir hata oluştu:", error);
+    //       });
+    //   } else {
+    //     console.log("No images selected.");
+    //   }
+    // });
+    $.ajax({
+      url: "http://localhost:5137/api/admin/shoprepo/shops/update/10",
+      method: "POST",
+      dataType: "json",
+      data: JSON.stringify(jsonData),
+      contentType: "application/json",
+      success: function (data) {
+        // Update the HTML element with the retrieved data
+        console.log(data, "request");
       },
-    })
-      .then((response) => {
-        console.log(response, "response");
-        if (response.ok) {
-          console.log("Gönderme başarılı.", response);
-          // Burada başarılı bir şekilde gönderildiğini belirten işlemleri yapabilirsiniz.
-        } else {
-          console.error("Gönderme başarısız.");
-          // Gönderme başarısızsa uygun işlemleri yapabilirsiniz.
-        }
-      })
-      .catch((error) => {
-        console.error("Bir hata oluştu:", error);
-      });
-  } else {
-    console.log("No images selected.");
+      error: function (xhr, status, error) {
+        // Handle errors here
+        console.error("AJAX error:", error);
+      },
+    });
   }
 });

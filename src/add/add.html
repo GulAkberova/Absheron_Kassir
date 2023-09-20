@@ -74,7 +74,7 @@
             </div>
           </div>
 
-          <form method="PUT">
+          <form id="photoForm" action="submit_url" method="POST">
             <div class="status_body_buttons status_body_buttons_end">
               <button class="status_body_buttons_gray" type="button">
                 Açıqdır
@@ -86,6 +86,7 @@
             <div class="add_body_img">
               <p>Mağaza şəkili:</p>
               <div id="cameraContainer">
+                <input type="hidden" name="photo" id="photoInput" />
                 <input id="multiple_data" multiple style="display: none" />
                 <button id="captureButton" type="button">
                   <i class="fa-solid fa-camera"></i>
@@ -131,6 +132,8 @@
         </div>
       </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="./add.js"></script>
     <script>
       const callButton = document.getElementById("callButton");

@@ -192,21 +192,6 @@ const arr = [];
 saveButton.addEventListener("click", () => {
   if (selectedImages.length > 0) {
     console.log("Selected Images:", selectedImages);
-
-    // Önce seçilen görüntüleri bir FormData nesnesine ekleyelim
-    // const formData = new FormData();
-    // selectedImages.forEach((image, index) => {
-    //   formData.append(`image_${index}`, image.blob, `image_${index}.png`);
-    // });
-    // formData.append(statuss);
-    // FormData içeriğini kontrol et
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(value);
-    //   arr.push(value);
-    // }
-    // console.log(arr);
-    // JSON verileri oluştur
-
     const formData = new FormData();
     for (let i = 0; i < selectedImages.length; i++) {
       formData.append("photos", selectedImages[i]);
@@ -215,37 +200,6 @@ saveButton.addEventListener("click", () => {
     formData.append("status", statuss);
     console.log(formData, "formData");
 
-    // const jsonData = {
-    //   photos: selectedImages, // Buraya seçilen görüntüleri ekleyin
-    //   status: statuss, // Seçilen status'u ekleyin
-    // };
-    // console.log(jsonData);
-
-    // Fetch ile POST isteği gönderme
-    //     fetch(`http://localhost:5137/api/admin/shoprepo/shops/update/10`, {
-    //       method: "POST", // PUT isteği kullanabilirsiniz
-    //       body: jsonData, // JSON verileri gönderin
-    //       headers: {
-    //         "Content-Type": "application/json", // JSON verisi gönderiyoruz
-    //       },
-    //     })
-    //       .then((response) => {
-    //         console.log(response, "response");
-    //         if (response.ok) {
-    //           console.log("Gönderme başarılı.", response);
-    //           // Burada başarılı bir şekilde gönderildiğini belirten işlemleri yapabilirsiniz.
-    //         } else {
-    //           console.error("Gönderme başarısız.");
-    //           // Gönderme başarısızsa uygun işlemleri yapabilirsiniz.
-    //         }
-    //       })
-    //       .catch((error) => {
-    //         console.error("Bir hata oluştu:", error);
-    //       });
-    //   } else {
-    //     console.log("No images selected.");
-    //   }
-    // });
     $.ajax({
       url: `http://localhost:5137/api/admin/shoprepo/shops/update/${id}`,
       method: "POST",

@@ -89,12 +89,37 @@ function createOverlay() {
   addButton.textContent = "Yadda saxla";
   addButton.addEventListener("click", () => {
     const currentTime = new Date(); // Şu anki tarih ve saat
+    // _______________________________________________________________
+
+    // const canvasDataUrl = canvas.toDataURL("image/jpeg"); // Get the canvas data as a data URL
+    // const base64Image = canvasDataUrl.split(",")[1]; // Extract the base64-encoded image data
+    // console.log(canvasDataUrl, "url");
+    // console.log(base64Image, "base64Image");
+
+    // // Convert the base64 data to a Blob object
+    // const byteCharacters = atob(base64Image);
+    // const byteNumbers = new Array(byteCharacters.length);
+    // console.log(byteCharacters, "byteCharacters");
+    // console.log(byteNumbers, "byteNumbers");
+
+    // for (let i = 0; i < byteCharacters.length; i++) {
+    //   byteNumbers[i] = byteCharacters.charCodeAt(i);
+    // }
+
+    // const byteArray = new Uint8Array(byteNumbers);
+    // const imageBlob = new Blob([byteArray], { type: "image/jpeg" });
+    // console.log(byteArray, "byteArray");
+    // console.log(imageBlob, "imageBlob");
+
+    // ___________________________________________________________________________--
+
     const blob = capturedPhotoBlob;
+
     const fileName = currentTime.toISOString() + ".jpg"; // Generate a unique filename using the timestamp
     const imageFile = new File([blob], fileName, { type: "image/jpeg" }); // Create a File object
     console.log(imageFile, "imageFile");
     imageContainer.appendChild(createThumbnail(blob)); // Display the thumbnail using the original Blob
-    selectedImages.push(createThumbnail2(blob)); // Add the image data with the File object to the array
+    selectedImages.push(imageFile); // Add the image data with the File object to the array
     closeOverlay();
   });
   console.log(selectedImages, "selectedImages");
@@ -181,11 +206,19 @@ saveButton.addEventListener("click", () => {
     // console.log(arr);
     // JSON verileri oluştur
 
-    const jsonData = {
-      photos: selectedImages, // Buraya seçilen görüntüleri ekleyin
-      status: statuss, // Seçilen status'u ekleyin
-    };
-    console.log(jsonData);
+    const formData = new FormData();
+    for (let i = 0; i < selectedImages.length; i++) {
+      formData.append("photos", selectedImages[i]);
+      console.log(selectedImages[i], "seEeeeeee"); // Append the image file to the "photos[]" array
+    }
+    formData.append("status", statuss);
+    console.log(formData, "formData");
+
+    // const jsonData = {
+    //   photos: selectedImages, // Buraya seçilen görüntüleri ekleyin
+    //   status: statuss, // Seçilen status'u ekleyin
+    // };
+    // console.log(jsonData);
 
     // Fetch ile POST isteği gönderme
     //     fetch(`http://localhost:5137/api/admin/shoprepo/shops/update/10`, {
@@ -215,9 +248,10 @@ saveButton.addEventListener("click", () => {
     $.ajax({
       url: "http://localhost:5137/api/admin/shoprepo/shops/update/10",
       method: "POST",
-      dataType: "json",
-      data: JSON.stringify(jsonData),
-      contentType: "application/json",
+      dataType: false,
+      data: formData,
+      processData: false,
+      contentType: false,
       success: function (data) {
         // Update the HTML element with the retrieved data
         console.log(data, "request");

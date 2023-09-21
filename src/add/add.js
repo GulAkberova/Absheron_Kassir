@@ -9,6 +9,7 @@ let facingMode = "environment"; // Başlangıçta arka kamera
 // URL'den id'yi al
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
+console.log(id, "id");
 
 captureButton.addEventListener("click", async () => {
   try {
@@ -246,7 +247,7 @@ saveButton.addEventListener("click", () => {
     //   }
     // });
     $.ajax({
-      url: "http://localhost:5137/api/admin/shoprepo/shops/update/10",
+      url: `http://localhost:5137/api/admin/shoprepo/shops/update/${id}`,
       method: "POST",
       dataType: false,
       data: formData,

@@ -9,7 +9,7 @@ let facingMode = "environment"; // Başlangıçta arka kamera
 // URL'den id'yi al
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
-console.log(id, "id");
+const idd = parseInt(id);
 
 captureButton.addEventListener("click", async () => {
   try {
@@ -197,11 +197,12 @@ saveButton.addEventListener("click", () => {
       formData.append("photos", selectedImages[i]);
       console.log(selectedImages[i], "seEeeeeee"); // Append the image file to the "photos[]" array
     }
+    // formData.append("id", Id);
     formData.append("status", statuss);
     console.log(formData, "formData");
 
     $.ajax({
-      url: `http://localhost:5137/api/admin/shoprepo/shops/update/${id}`,
+      url: `http://localhost:5137/api/admin/shoprepo/shops/update?id=${idd}`,
       method: "POST",
       dataType: false,
       data: formData,

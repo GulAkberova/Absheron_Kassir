@@ -245,18 +245,33 @@
       dateInput.addEventListener("change", () => {
         const selectedDate = dateInput.value;
 
+        // API'ye göndermek için veriyi hazırlayın
+        const postData = {
+          dateTime: selectedDate,
+        };
         // API'den verileri getirin ve grafikleri güncelleyin
         fetchData(selectedDate);
       });
+
+      // __________________________________________________________
+
+      // __________________________________________________________________
       // API'den verileri getirin ve grafikleri güncelleyin
       async function fetchData(selectedDate) {
         console.log(selectedDate, "seeeeeeeeeee");
         const trueCounts = [];
         const falseCounts = [];
+        const datesLabel = [];
         try {
-          const response = await fetch(
-            `https://cms.absherontm.az/admin/shoprepo/weeks/${selectedDate}`
-          );
+          const apiUrl = `https://cms.absherontm.az/admin/shoprepo/weeks?dateTime=${selectedDate}`;
+
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            // body: JSON.stringify(data),
+          });
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
@@ -265,6 +280,7 @@
           data.map((item) => {
             trueCounts.push(item.trueCount);
             falseCounts.push(item.falseCount);
+            datesLabel.push(item.dates);
           });
 
           console.log(data, "data");
@@ -272,6 +288,8 @@
 
           chart1Data.datasets[0].data = trueCounts;
           chart2Data.datasets[0].data = falseCounts;
+          chart1Data.labels = datesLabel;
+          chart2Data.labels = datesLabel;
 
           createChart(chart1Data);
           createChart(chart2Data);

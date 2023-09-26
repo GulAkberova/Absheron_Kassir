@@ -44,11 +44,11 @@
           <div class="report_daydiv">
             <div>
               <p>Açıq:</p>
-              <button>789</button>
+              <button id="open_btn">789</button>
             </div>
             <div>
               <p>Bağlı:</p>
-              <button>89</button>
+              <button id="close_btn">89</button>
             </div>
           </div>
 
@@ -154,6 +154,7 @@
       //       console.error("Fetch error", error);
       //     });
       // });
+
       const dateInput = document.getElementById("dateInput");
 
       const chart1Data = {
@@ -285,6 +286,21 @@
 
           console.log(data, "data");
           console.log(trueCounts, "trueCounts");
+          const open_btn = document.querySelector("#open_btn");
+          const close_btn = document.querySelector("#close_btn");
+
+          // Calculate the sum of trueCounts array
+          const sumOfTrueCounts = trueCounts.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0
+          );
+          const sumOfFalseCounts = falseCounts.reduce(
+            (acc, currentValue) => acc + currentValue,
+            0
+          );
+          open_btn.textContent = sumOfTrueCounts;
+          close_btn.textContent = sumOfFalseCounts;
+          // console.log(sumOfTrueCounts);
 
           chart1Data.datasets[0].data = trueCounts;
           chart2Data.datasets[0].data = falseCounts;

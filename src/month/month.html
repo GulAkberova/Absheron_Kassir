@@ -34,25 +34,41 @@
               <h2>Bu ay</h2>
             </div>
             <div>
+              <label for="dateInput">Tarih Seçin:</label>
+              <input type="date" id="dateInput" name="dateInput" />
               <a href="#">
                 <img src="../../assets/icon/header/right.svg" />
               </a>
             </div>
           </div>
+          <!-- <div class="report_daydiv">
+            <div>
+              <p>Açıq:</p>
+              <button id="open_btn">789</button>
+            </div>
+            <div>
+              <p>Bağlı:</p>
+              <button id="close_btn">89</button>
+            </div>
+          </div> -->
 
           <div class="week_chart_bigdiv">
+            <div class="week_chart_btns">
+              <button id="chart1-button">Açıq</button>
+              <button id="chart2-button">Bağlı</button>
+            </div>
             <div class="week_chart_div">
               <canvas id="chart-area" width="400" height="200"></canvas>
             </div>
           </div>
           <div class="report_wm_div">
             <div>
-              <img src="../../assets/icon/header/day.svg" />
+              <img src="../../assets/icon/header/week.svg" />
               <a href="../day/day.html">Bu gün</a>
             </div>
             <div>
-              <img src="../../assets/icon/header/week.svg" />
-              <a href="../week/week.html">Bu Həftə</a>
+              <img src="../../assets/icon/header/month.svg" />
+              <a href="../month/month.html">Bu ay</a>
             </div>
           </div>
           <div class="report_maindiv">
@@ -105,26 +121,78 @@
     </section>
 
     <script>
+      // const dateForm = document.getElementById("date-form");
+      // // const dateInput = document.getElementById("dateInput");
+      // dateForm.addEventListener("submit", (event) => {
+      //   event.preventDefault();
+      //   const selectDate = dateInput.value;
+      //   console.log(selectDate);
+      //   const apiUrl = "https://cms.absherontm.az/admin/shoprepo/weeks";
+
+      //   const postData = {
+      //     dateTime: selectDate,
+      //   };
+
+      //   fetch(apiUrl, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(postData),
+      //   })
+      //     .then((response) => {
+      //       if (!response.ok) {
+      //         throw new Error("Network response was not ok");
+      //       }
+      //       return response.json();
+      //     })
+      //     .then((data) => {
+      //       console.log("API yanıtı:", data);
+      //       // API yanıtını işleyin veya görüntüleyin
+      //     })
+      //     .catch((error) => {
+      //       console.error("Fetch error", error);
+      //     });
+      // });
+
+      const dateInput = document.getElementById("dateInput");
+
       const chart1Data = {
         labels: [
-          "Yanvar",
-          "Fevral",
-          "Mart",
-          "Aprel",
-          "May",
-          "İyun",
-          "İyul",
-          "Avqust",
-          "Sentyabr",
-          "Oktyabr",
-          "Noyabr",
-          "Dekabr",
+          "Pazartesi",
+          "Salı",
+          "Çarşamba",
+          "Perşembe",
+          "Cuma",
+          "Cumartesi",
+          "Pazar",
         ],
         datasets: [
           {
             label: "Açıq",
             data: [12, 19, 3, 5, 2, 3, 10], // Veri noktalarını buraya ekleyin
             borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 2,
+            fill: false,
+          },
+        ],
+      };
+
+      const chart2Data = {
+        labels: [
+          "Pazartesi",
+          "Salı",
+          "Çarşamba",
+          "Perşembe",
+          "Cuma",
+          "Cumartesi",
+          "Pazar",
+        ],
+        datasets: [
+          {
+            label: "Bağlı",
+            data: [30, 45, 60, 22, 80, 65, 50], // Veri noktalarını buraya ekleyin
+            borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 2,
             fill: false,
           },
@@ -140,7 +208,7 @@
         }
 
         currentChart = new Chart(ctx, {
-          type: "line", // Grafiğin türünü burada belirleyebilirsiniz (örneğin, 'bar' veya 'pie')
+          type: "line",
           data: data,
           options: {
             // Grafiğin ayarları burada belirleyebilirsiniz
@@ -148,8 +216,88 @@
         });
       }
 
-      // Başlangıçta ilk grafik oluşturulur
-      createChart(chart1Data);
+      const chart1Button = document.getElementById("chart1-button");
+      const chart2Button = document.getElementById("chart2-button");
+      chart1Button.style.backgroundColor = "#e2dfdf44";
+      chart1Button.style.borderRight = "1px solid rgba(129, 129, 129, 0.5)";
+
+      chart1Button.addEventListener("click", () => {
+        createChart(chart1Data);
+        chart1Button.style.backgroundColor = "#e2dfdf44";
+        chart1Button.style.borderRight = "1px solid rgba(129, 129, 129, 0.5)";
+        chart2Button.style.backgroundColor = "";
+      });
+
+      chart2Button.addEventListener("click", () => {
+        createChart(chart2Data);
+        chart2Button.style.backgroundColor = "#e2dfdf44";
+        chart1Button.style.backgroundColor = "";
+      });
+
+      // Sayfa yüklendiğinde bugünkü tarihi alın ve API'ye gönderin
+      document.addEventListener("DOMContentLoaded", () => {
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.value = today;
+
+        fetchData(today); // Sayfa yüklendiğinde otomatik olarak bugünkü tarihi API'ye gönderin
+      });
+
+      // Tarih inputunun değişikliğini dinleyin
+      dateInput.addEventListener("change", () => {
+        const selectedDate = dateInput.value;
+
+        // API'ye göndermek için veriyi hazırlayın
+        const postData = {
+          dateTime: selectedDate,
+        };
+        // API'den verileri getirin ve grafikleri güncelleyin
+        fetchData(selectedDate);
+      });
+
+      // __________________________________________________________
+
+      // __________________________________________________________________
+      // API'den verileri getirin ve grafikleri güncelleyin
+      async function fetchData(selectedDate) {
+        console.log(selectedDate, "seeeeeeeeeee");
+        const trueCounts = [];
+        const falseCounts = [];
+        const datesLabel = [];
+        try {
+          const apiUrl = `https://cms.absherontm.az/admin/shoprepo/months?dateTime=${selectedDate}`;
+
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            // body: JSON.stringify(data),
+          });
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+
+          data.map((item) => {
+            trueCounts.push(item.trueCount);
+            falseCounts.push(item.falseCount);
+            datesLabel.push(item.month);
+          });
+
+          console.log(data, "data");
+          console.log(trueCounts, "trueCounts");
+
+          chart1Data.datasets[0].data = trueCounts;
+          chart2Data.datasets[0].data = falseCounts;
+          chart1Data.labels = datesLabel;
+          chart2Data.labels = datesLabel;
+
+          createChart(chart1Data);
+          createChart(chart2Data);
+        } catch (error) {
+          console.error("Fetch error", error);
+        }
+      }
     </script>
   </body>
 </html>

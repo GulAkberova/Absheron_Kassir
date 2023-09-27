@@ -127,13 +127,50 @@
 .galery_divs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
+  gap: 5px;
 }
 
 .galery_divs div img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
+}
+/* _________________Modal_____________ */
+.modal_gallery {
+  position: fixed !important ;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.671);
+  position: relative;
+  z-index: 99;
+}
+.modal_content_gallery {
+  padding: 15px 0px;
+  max-width: 300px;
+  width: 100%;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+}
+.modal_content_gallery p {
+  text-align: center;
+}
+#modalImage {
+  width: 90%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 @media (max-width: 550px) {
   .galery_divs {

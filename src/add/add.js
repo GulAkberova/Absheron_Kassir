@@ -1,4 +1,5 @@
 const cameraFeed = document.getElementById("cameraFeed");
+const cameraFeed_Bigdiv = document.getElementById("cameraFeed_Bigdiv");
 const captureButton = document.getElementById("captureButton");
 const canvas = document.getElementById("canvas");
 const imageContainer = document.getElementById("imageContainer");
@@ -17,7 +18,7 @@ captureButton.addEventListener("click", async () => {
       video: { facingMode: facingMode },
     });
 
-    cameraFeed.style.display = "block"; // Kamera görüntüsünü göster
+    cameraFeed_Bigdiv.style.display = "block"; // Kamera görüntüsünü göster
     captureButton.style.display = "none"; // Butonu gizle
 
     cameraFeed.srcObject = stream;
@@ -31,16 +32,16 @@ let capturedPhotoBlob = null;
 let overlayContainer = null; // Değişkeni tanımlayın
 
 // Kameranın boyutlarını pencere boyutlarına uygun olarak güncelle
-cameraFeed.width = window.innerWidth;
-cameraFeed.height = window.innerHeight;
+// cameraFeed.width = window.innerWidth;
+// cameraFeed.height = window.innerHeight;
 
 // KameraFeed boyutlarını güncelle
 window.addEventListener("resize", () => {
-  cameraFeed.width = window.innerWidth;
-  cameraFeed.height = window.innerHeight;
+  // cameraFeed.width = window.innerWidth;
+  // cameraFeed.height = window.innerHeight;
 });
-
-cameraFeed.addEventListener("click", async () => {
+const cameraFeedBtn = document.getElementById("cameraFeedBtn");
+cameraFeedBtn.addEventListener("click", async () => {
   canvas.width = cameraFeed.videoWidth;
   canvas.height = cameraFeed.videoHeight;
   canvas
@@ -157,7 +158,7 @@ function createThumbnail2(blob) {
 }
 
 function closeOverlay() {
-  cameraFeed.style.display = "none";
+  cameraFeed_Bigdiv.style.display = "none";
   captureButton.style.display = "block";
   capturedPhotoBlob = null;
   if (overlayContainer) {

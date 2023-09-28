@@ -75,14 +75,33 @@
   transition: 0.5s all ease;
   font-size: 36px;
 }
-
-#cameraFeed {
+#cameraFeed_Bigdiv {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   background-color: black;
+  padding-top: 60px;
+}
+#cameraFeed {
+  width: 100%;
+  height: 80%;
+  margin: auto;
+  background-color: black;
+}
+#cameraBtnDiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+#cameraFeedBtn {
+  background-color: red;
+  border: 1px solid red;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  cursor: pointer;
 }
 #imageContainer img {
   border: 2px solid var(--blue-color);

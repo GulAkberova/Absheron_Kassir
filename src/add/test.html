@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <style>
+      #my_camera {
+        width: 320px;
+        height: 240px;
+        border: 1px solid black;
+      }
+    </style>
+    <form id="photoForm" action="submit_url" method="POST">
+      <div class="status_body_buttons status_body_buttons_end">
+        <button class="status_body_buttons_gray" type="button">Açıqdır</button>
+        <button class="status_body_buttons_gray" type="button">Bağlıdır</button>
+      </div>
+      <div class="add_body_img">
+        <p>Mağaza şəkili:</p>
+        <div id="cameraContainer">
+          <!-- <input type="hidden" name="photo" id="photoInput" />
+          <input id="multiple_data" multiple style="display: none" /> -->
+          <div id="my_camera"></div>
+
+          <input type="button" value="Camera" onClick="configure()" />
+          <!-- <i class="fa-solid fa-camera"></i> -->
+
+          <div id="cameraFeed_Bigdiv" style="display: none">
+            <video id="cameraFeed"></video>
+            <div id="cameraBtnDiv">
+              <button type="button" id="cameraFeedBtn"></button>
+            </div>
+          </div>
+          <canvas id="canvas" style="display: none"></canvas>
+          <div id="imageContainer" style="display: flex; flex-wrap: wrap"></div>
+        </div>
+      </div>
+    </form>
+
+    <!-- <div id="my_camera"></div> -->
+    <!-- <input type="button" value="Configure" onClick="configure()" /> -->
+    <input type="button" value="Take Snapshot" onClick="take_snapshot()" />
+    <input type="button" value="Save Snapshot" onClick="saveSnap()" />
+
+    <div id="results"></div>
+
+    <!-- Script -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript" src="webcamjs/webcam.min.js"></script>
+
+    <!-- Code to handle taking the snapshot and displaying it locally -->
+    <script language="JavaScript">
+      let statuss = false;
+      // Buttons olay dinleyicilerini ekle
+      const buttons = document.querySelectorAll(
+        ".status_body_buttons_end button"
+      );
+
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          // Tüm düğmeleri gri yap
+          buttons.forEach((btn) => {
+            btn.classList.remove("status_body_buttons_red");
+            btn.classList.add("status_body_buttons_gray");
+            console.log(btn);
+          });
+
+          // Seçilen düğmeyi kırmızı yap ve status'u güncelle
+          button.classList.remove("status_body_buttons_gray");
+          button.classList.add("status_body_buttons_red");
+
+          // Status'u güncelle (true veya false)
+          statuss = index === 0; // İlk düğme tıklanırsa status true, ikinci düğme tıklanırsa status false
+          console.log("Status:", statuss);
+        });
+      });
+      // Configure a few settings and attach camera
+      function configure() {
+        Webcam.set({
+          width: 320,
+          height: 240,
+          image_format: "jpeg",
+          jpeg_quality: 90,
+        });
+        Webcam.attach("#my_camera");
+      }
+      // A button for taking snaps
+
+      // preload shutter audio clip
+      var shutter = new Audio();
+      shutter.autoplay = false;
+      shutter.src = navigator.userAgent.match(/Firefox/)
+        ? "shutter.ogg"
+        : "shutter.mp3";
+
+      function take_snapshot() {
+        // play sound effect
+        shutter.play();
+
+        // take snapshot and get image data
+        Webcam.snap(function (data_uri) {
+          // display results in page
+          document.getElementById("results").innerHTML =
+            '<img id="imageprev" src="' + data_uri + '"/>';
+        });
+
+        Webcam.reset();
+      }
+      function base64toBlob(base64Data, contentType) {
+        contentType = contentType || "";
+        base64Data = base64Data.split(",")[1]; // 'data:image/png;base64,' gibi ön ekleri kaldır
+        const sliceSize = 4096;
+        const byteCharacters = atob(base64Data);
+        const bytesLength = byteCharacters.length;
+        const slicesCount = Math.ceil(bytesLength / sliceSize);
+        const byteArrays = new Array(slicesCount);
+
+        for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+          const begin = sliceIndex * sliceSize;
+          const end = Math.min(begin + sliceSize, bytesLength);
+
+          const bytes = new Array(end - begin);
+          for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+            bytes[i] = byteCharacters[offset].charCodeAt(0);
+          }
+
+          byteArrays[sliceIndex] = new Uint8Array(bytes);
+        }
+
+        return new Blob(byteArrays, { type: contentType });
+      }
+      function blobToFile(blob, fileName, contentType) {
+        const options = { type: contentType };
+        const file = new File([blob], fileName, options);
+        return file;
+      }
+
+      function saveSnap() {
+        // Get base64 value from <img id='imageprev'> source
+        var base64image = document.getElementById("imageprev").src;
+        const blob = base64toBlob(base64image, "image/png"); // 'image/png' uygun olan MIME türünü belirtmelisiniz
+        const file = blobToFile(blob, "image.png", "image/png");
+
+        const formData = new FormData();
+        console.log(file);
+        formData.append("photos", file);
+        formData.append("status", statuss);
+        console.log(formData, "fooooor");
+        // Webcam.upload(file, "upload.php", function (code, text) {
+        //   console.log(code, text);
+        //   console.log("Save successfully");
+        //   //console.log(text);
+        // });
+
+        $.ajax({
+          url: "https://localhost:7046/api/admin/shoprepo/shops/update?Id=10",
+          method: "POST",
+          dataType: false,
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            // Update the HTML element with the retrieved data
+            console.log(data, "request");
+          },
+          error: function (xhr, status, error) {
+            // Handle errors here
+            console.error("AJAX error:", error);
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

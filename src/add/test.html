@@ -16,44 +16,186 @@
   <body>
     <style>
       #my_camera {
-        width: 320px;
-        height: 240px;
-        border: 1px solid black;
+        width: 150px;
+        height: 60px;
+        border: 1px solid var(--blue-color);
+        padding: 0px 30px;
+        border-radius: 2px;
+      }
+      .camera_div_webcam {
+        padding: 8px 20px;
+        border: 1px solid var(--blue-color);
+        background-color: var(--blue-color);
+        color: white;
+        border-radius: 5px;
+      }
+      #results {
+        border: 1px solid var(--blue-color);
+        width: 250px;
+        height: 150px;
+        margin: 10px 0px 0px 0px;
+        border-radius: 5px;
+      }
+      #results img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .webcam_save {
+        color: white;
+        text-align: center;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        padding: 15px 0px;
+        border-radius: 6px;
       }
     </style>
-    <form id="photoForm" action="submit_url" method="POST">
-      <div class="status_body_buttons status_body_buttons_end">
-        <button class="status_body_buttons_gray" type="button">Açıqdır</button>
-        <button class="status_body_buttons_gray" type="button">Bağlıdır</button>
-      </div>
-      <div class="add_body_img">
-        <p>Mağaza şəkili:</p>
-        <div id="cameraContainer">
-          <!-- <input type="hidden" name="photo" id="photoInput" />
-          <input id="multiple_data" multiple style="display: none" /> -->
-          <div id="my_camera"></div>
-
-          <input type="button" value="Camera" onClick="configure()" />
-          <!-- <i class="fa-solid fa-camera"></i> -->
-
-          <div id="cameraFeed_Bigdiv" style="display: none">
-            <video id="cameraFeed"></video>
-            <div id="cameraBtnDiv">
-              <button type="button" id="cameraFeedBtn"></button>
+    <section class="tm_bigdiv">
+      <header class="list_header">
+        <div class="container">
+          <div class="list_header_div">
+            <img src="../../assets/logo/logo.svg" class="list_header_img" />
+            <div class="list_header_div_text">
+              <div>
+                <img src="../../assets/icon/header/magazine.svg" />
+                <a href="#">Mağazalar</a>
+              </div>
+              <div>
+                <img src="../../assets/icon/header/check.svg" />
+                <a href="../add/add.html">Hesabat</a>
+              </div>
             </div>
           </div>
-          <canvas id="canvas" style="display: none"></canvas>
-          <div id="imageContainer" style="display: flex; flex-wrap: wrap"></div>
+        </div>
+      </header>
+      <div class="status_body">
+        <div class="container">
+          <div class="status_body_header">
+            <h2>Bügün</h2>
+            <div>
+              <p>8/24/2023</p>
+              <a href="#">
+                <img src="../../assets/icon/header/right.svg" />
+              </a>
+            </div>
+          </div>
+          <div class="status_body_infodiv">
+            <div class="status_body_sectordiv">
+              <p>Sektor:</p>
+              <h3>Tikinti materialları</h3>
+            </div>
+            <p>Mağaza ünvanı:</p>
+            <div class="status_body_infodiv_divs">
+              <div>99<span>Sıra</span></div>
+              <div>Prestij B<span>Korpus</span></div>
+              <div>99 <span>Mağaza</span></div>
+              <div class="status_body_infodiv_divs_blue">
+                400 <span>Sahə M2</span>
+              </div>
+            </div>
+            <div class="status_body_infodiv_textdiv">
+              <div>
+                <p>Mağazanın adı:</p>
+                <h3>Ağa İnşaat</h3>
+              </div>
+              <div>
+                <p>İcarəçinin Ad, Soyad, Ata adı:</p>
+
+                <h3>Hümbətov Anar Vahid</h3>
+              </div>
+              <div>
+                <p>Fəaliyyət sahəsi:</p>
+                <h3>Təyyarə yağları</h3>
+              </div>
+            </div>
+          </div>
+
+          <form id="photoForm" action="submit_url" method="POST">
+            <div class="status_body_buttons status_body_buttons_end">
+              <button class="status_body_buttons_gray" type="button">
+                Açıqdır
+              </button>
+              <button class="status_body_buttons_gray" type="button">
+                Bağlıdır
+              </button>
+            </div>
+            <div class="add_body_img">
+              <p>Mağaza şəkili:</p>
+              <div id="cameraContainer">
+                <!-- <input type="hidden" name="photo" id="photoInput" />
+                <input id="multiple_data" multiple style="display: none" /> -->
+                <div id="my_camera"></div>
+
+                <input
+                  type="button"
+                  value="Kamera"
+                  onClick="configure()"
+                  class="camera_div_webcam"
+                />
+                <!-- <i class="fa-solid fa-camera"></i> -->
+
+                <div id="cameraFeed_Bigdiv" style="display: none">
+                  <video id="cameraFeed"></video>
+                  <div id="cameraBtnDiv">
+                    <button type="button" id="cameraFeedBtn"></button>
+                  </div>
+                </div>
+                <canvas id="canvas" style="display: none"></canvas>
+                <div
+                  id="imageContainer"
+                  style="display: flex; flex-wrap: wrap"
+                ></div>
+              </div>
+            </div>
+          </form>
+
+          <!-- <div id="my_camera"></div> -->
+          <!-- <input type="button" value="Configure" onClick="configure()" /> -->
+          <input
+            type="button"
+            value="Yadda saxla"
+            onClick="take_snapshot()"
+            class="camera_div_webcam"
+          />
+
+          <div id="results"></div>
+
+          <div class="status_body_phone">
+            <div>
+              <p>Telefon nömrəsi:</p>
+              <h2 id="phoneNumber">+994 50 329 09 99</h2>
+            </div>
+            <button id="callButton">
+              <img src="../../assets/icon/phone.svg" />
+              <p>Zeng et</p>
+            </button>
+          </div>
+          <div class="status_body_icra">
+            <div>
+              <p>İcra vəziyyəti:</p>
+              <p>İcarəyə verildiyi tarix:</p>
+            </div>
+            <div>
+              <h3>İcarəyə verilib</h3>
+              <h3>8/24/2023</h3>
+            </div>
+          </div>
+          <div class="status_body_buttons">
+            <input
+              class="status_body_buttons_red webcam_save"
+              type="button"
+              value="Yadda saxla"
+              onClick="saveSnap()"
+            />
+            <a href="#">
+              <button class="status_body_buttons_gray">İmtina et</button>
+            </a>
+          </div>
         </div>
       </div>
-    </form>
-
-    <!-- <div id="my_camera"></div> -->
-    <!-- <input type="button" value="Configure" onClick="configure()" /> -->
-    <input type="button" value="Take Snapshot" onClick="take_snapshot()" />
-    <input type="button" value="Save Snapshot" onClick="saveSnap()" />
-
-    <div id="results"></div>
+    </section>
 
     <!-- Script -->
     <script

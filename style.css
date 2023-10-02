@@ -1042,3 +1042,29 @@
     font-size: 18px;
   }
 }
+/* _____________________________________________________ */
+.telefone_div {
+  min-height: calc(100vh - 300px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.telefone_div a {
+  width: 45%;
+  border-radius: 6px;
+  border: 1px solid rgba(129, 129, 129, 0.5);
+  background: var(--white-color);
+  padding: 10px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--blue-color);
+  text-align: center;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  padding: 5px 10px;
+  line-height: 25.2px; /* 101.667% */
+  letter-spacing: -0.06px;
+}

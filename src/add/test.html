@@ -12,6 +12,13 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <style>
@@ -198,6 +205,9 @@
     </section>
 
     <!-- Script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"
@@ -316,7 +326,7 @@
         // });
 
         $.ajax({
-          url: `https://cms.absherontm.az/api/admin/shoprepo/shops/update?Id=${idd}`,
+          url: `https://cms.absherontm.az/api/admin/shoprepo/shops/update?Id=10`,
           method: "POST",
           dataType: false,
           data: formData,
@@ -325,10 +335,13 @@
           success: function (data) {
             // Update the HTML element with the retrieved data
             console.log(data, "request");
+            toastr.success("Melumat gonderildi");
           },
           error: function (xhr, status, error) {
             // Handle errors here
             console.error("AJAX error:", error);
+            // Show an error toaster notification if needed
+            toastr.error("AJAX error: " + error);
           },
         });
       }

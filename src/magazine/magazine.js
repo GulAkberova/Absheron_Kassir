@@ -30,7 +30,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     data.forEach((item) => {
       const kart = document.createElement("a");
       kart.classList.add("magazine_div", "tm_div");
-      kart.href = `../add/add.html?id=${item.id}`;
+      // Kullanıcının cihaz türünü kontrol et
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      var targetURL;
+      // Eğer Android ise
+      if (/Android/i.test(userAgent)) {
+        targetURL = `../add/add.html?id=${item.id}`;
+      }
+      // Eğer iPhone veya iPad ise
+      else if (/iPhone|iPad/i.test(userAgent)) {
+        targetURL = `../add/test.html?id=${item.id}`;
+      }
+      // Diğer cihazlar için varsayılan URL
+      else {
+        targetURL = `../add/add.html?id=${item.id}`;
+      }
+
+      kart.href = targetURL;
       kart.innerHTML = `
       <img src="../../assets//images/magazine/magaza.png" />
               <ul class="magazine_text_ul">

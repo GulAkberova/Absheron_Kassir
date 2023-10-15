@@ -55,7 +55,7 @@
                   <div class="calendar_div">
                     <form>
                       <input type="date" class="form_control" /><br />
-                      <button>Gonder</button>
+                      <button id="modal_send_btn">Gonder</button>
                     </form>
                   </div>
                 </div>
@@ -147,6 +147,7 @@
         );
         const calendarModal = document.getElementById("calendar_modal");
         const closeCalendarButton = document.getElementById("close_calendar");
+        const modal_send_btn = document.getElementById("modal_send_btn");
 
         // Bu değişken sayesinde takvim penceresi açık mı kapalı mı kontrol edebiliriz
         let isCalendarOpen = false;
@@ -168,6 +169,10 @@
         });
 
         closeCalendarButton.addEventListener("click", () => {
+          calendarModal.style.display = "none";
+          isCalendarOpen = false; // Takvim penceresi kapatıldığında durumu güncelle
+        });
+        modal_send_btn.addEventListener("click", () => {
           calendarModal.style.display = "none";
           isCalendarOpen = false; // Takvim penceresi kapatıldığında durumu güncelle
         });

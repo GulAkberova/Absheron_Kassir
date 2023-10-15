@@ -989,9 +989,10 @@
     font-size: 17px;
   }
   .status_body_header h2 {
-    font-size: 22px;
+    font-size: 16px;
   }
-  .status_body_header p {
+  .status_body_header p,
+  .status_body_header label {
     font-size: 14px !important;
   }
   .report_wm_div div a,
@@ -1120,6 +1121,6 @@
     max-width: 270px;
   }
   .form_control {
-    width: 100%;
+    width: 230px;
   }
 }

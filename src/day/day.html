@@ -141,25 +141,43 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const openCalendarButton = document.getElementById(
-        "open-calendar-button"
-      );
-      const calendarModal = document.getElementById("calendar_modal");
-      const closeCalendarButton = document.getElementById("close_calendar");
+      document.addEventListener("DOMContentLoaded", function () {
+        const openCalendarButton = document.getElementById(
+          "open-calendar-button"
+        );
+        const calendarModal = document.getElementById("calendar_modal");
+        const closeCalendarButton = document.getElementById("close_calendar");
 
-      openCalendarButton.addEventListener("click", () => {
-        calendarModal.style.display = "block"; // Takvim penceresini görünür hale getirin
-      });
+        // Bu değişken sayesinde takvim penceresi açık mı kapalı mı kontrol edebiliriz
+        let isCalendarOpen = false;
 
-      closeCalendarButton.addEventListener("click", () => {
-        calendarModal.style.display = "none"; // Takvim penceresini gizleyin
-      });
+        // Sayfa ilk yüklendiğinde kalendar gizli olsun
+        calendarModal.style.display = "none";
 
-      // Eğer kullanıcı dışarıya tıklarsa da pencereyi kapatmak için aşağıdaki kodu kullanabilirsiniz:
-      window.addEventListener("click", (event) => {
-        if (event.target === calendarModal) {
-          calendarModal.style.display = "none"; // Takvim penceresini gizleyin
-        }
+        openCalendarButton.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          // Eğer takvim penceresi kapalıysa aç
+          if (!isCalendarOpen) {
+            calendarModal.style.display = "block";
+            isCalendarOpen = true;
+          } else {
+            calendarModal.style.display = "none";
+            isCalendarOpen = false;
+          }
+        });
+
+        closeCalendarButton.addEventListener("click", () => {
+          calendarModal.style.display = "none";
+          isCalendarOpen = false; // Takvim penceresi kapatıldığında durumu güncelle
+        });
+
+        window.addEventListener("click", (event) => {
+          if (event.target === calendarModal) {
+            calendarModal.style.display = "none";
+            isCalendarOpen = false; // Takvim penceresi kapatıldığında durumu güncelle
+          }
+        });
       });
     </script>
   </body>

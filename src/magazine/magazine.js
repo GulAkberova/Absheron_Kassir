@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // URL'den id'yi al
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
+  const Id = parseInt(id);
 
   // Bu, URL'den alınan id'yi konsolda gösterecek
 
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function fetchData() {
     try {
       const response = await fetch(
-        `https://cms.absherontm.az/api/admin/ShopRepo/Shops/${id}`
+        `https://cms.absherontm.az/api/admin/ShopRepo/Shops?Id=20`
       );
       if (!response.ok) {
         throw new Error("API isteği başarısız oldu.");
@@ -52,19 +53,35 @@ document.addEventListener("DOMContentLoaded", async function () {
               <ul class="magazine_text_ul">
                 <li>
                   Mağaza adı:<br />
-                  <b class="magazine_name_color">${item.shopName}</b>
+                  <b class="magazine_name_color">${
+                    item.shopName ? item.shopName : ""
+                  }</b>
                 </li>
                 <li>Sektor:<br /><b>Tikinti materialları</b></li>
-                <li>Korpus:<br /><b>Prestij B</b></li>
+                <li>Korpus:<br /><b>${
+                  item.prestij.korpusname ? item.prestij.korpusname : ""
+                }</b></li>
               </ul>
               <div class="magazine_text_end">
-                <p>Magaza: <b>125</b></p>
+                <p>Magaza: <b>${item.number ? item.number : ""}</b></p>
 
                 <p>Sıra: <b>1</b></p>
 
                 <div>
-                  <button class="sea_color">İcarəyə verilib</button>
-                  <button class="green_color">Açıqdır</button>
+                <button class="${
+                  item.rentalStatus === "İcarəyaVerilib"
+                    ? "sea_color"
+                    : item.rentalStatus === "Boşdur"
+                    ? "pink_color"
+                    : item.rentalStatus === "Tikintidədir"
+                    ? "dark_color"
+                    : "dark_color"
+                }">
+                ${item.rentalStatus ? item.rentalStatus : ""}
+            </button>
+                  <button class="${
+                    item.status ? "green_color" : "red_color"
+                  }">${item.status ? "Açıqdır" : "Qapalıdır"}</button>
                 </div>
               </div>
           `;

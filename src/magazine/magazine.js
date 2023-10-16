@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function fetchData() {
     try {
       const response = await fetch(
-        `https://cms.absherontm.az/api/admin/ShopRepo/Shops?Id=20`
+        `https://cms.absherontm.az/api/admin/ShopRepo/Shops?PrestijId=6&CategoryId=18
+        `
       );
       if (!response.ok) {
         throw new Error("API isteği başarısız oldu.");
@@ -48,8 +49,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
 
       kart.href = targetURL;
+      const imagePath = item.imgs[item.imgs.length - 1]?.imagePath;
+      const imageUrl = imagePath
+        ? `https://cms.absherontm.az/uploads/images/${imagePath}`
+        : "../../assets/images/magazine/default.jpg";
       kart.innerHTML = `
-      <img src="../../assets//images/magazine/magaza.png" />
+      <img src=${imageUrl} />
               <ul class="magazine_text_ul">
                 <li>
                   Mağaza adı:<br />

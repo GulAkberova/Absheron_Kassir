@@ -226,6 +226,7 @@
       const idd = parseInt(id);
 
       let statuss = false;
+      console.log(status, "1");
       // Buttons olay dinleyicilerini ekle
       const buttons = document.querySelectorAll(
         ".status_body_buttons_end button"
@@ -316,16 +317,9 @@
         const blob = base64toBlob(base64image, "image/png"); // 'image/png' uygun olan MIME türünü belirtmelisiniz
         const file = blobToFile(blob, "image.png", "image/png");
 
-        const formData = new FormData();
         console.log(file);
         formData.append("photos", file);
         formData.append("status", statuss);
-        console.log(formData, "fooooor");
-        // Webcam.upload(file, "upload.php", function (code, text) {
-        //   console.log(code, text);
-        //   console.log("Save successfully");
-        //   //console.log(text);
-        // });
 
         $.ajax({
           url: `http://localhost:5137/api/admin/shoprepo/shops/update?Id=25`,
@@ -338,6 +332,8 @@
             // Update the HTML element with the retrieved data
             console.log(data, "request");
             toastr.success("Melumat gonderildi");
+            window.location.href =
+              "https://cms.absherontm.az/admin/ShopRepo/Shops?Id=6";
           },
           error: function (xhr, status, error) {
             // Handle errors here

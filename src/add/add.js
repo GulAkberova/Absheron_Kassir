@@ -167,6 +167,7 @@ function closeOverlay() {
 }
 // ______________________Buttons____________________
 let statuss = false;
+console.log(statuss, "statuss");
 // Buttons olay dinleyicilerini ekle
 const buttons = document.querySelectorAll(".status_body_buttons_end button");
 
@@ -200,10 +201,11 @@ saveButton.addEventListener("click", () => {
     }
     // formData.append("id", Id);
     formData.append("status", statuss);
-    console.log(formData, "formData");
+    // console.log(formData, "formData");
+    console.log(statuss, "formData");
 
     $.ajax({
-      url: `http://localhost:5137/api/admin/shoprepo/shops/update?id=${idd}`,
+      url: `http://localhost:5137/api/admin/shoprepo/shops/update?Id=25`,
       method: "POST",
       dataType: false,
       data: formData,

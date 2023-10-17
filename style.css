@@ -1033,8 +1033,18 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
+.galery_divs div {
+  border: 2px solid red;
+}
 
-.galery_divs div img {
+.android_gallery_img,
+.defaul_gallery_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.ios_gallery_img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1070,11 +1080,19 @@
 .modal_content_gallery p {
   text-align: center;
 }
-#modalImage {
+.defaul_gallery_modal_img,
+.android_gallery_modal_img {
   width: 90%;
-  height: 500px;
   object-fit: cover;
   border-radius: 10px;
+  height: 100%;
+}
+.ios_gallery_modal_img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  transform: rotate(-90deg);
 }
 @media (max-width: 950px) {
   .galery_divs {
@@ -1108,10 +1126,14 @@
   .modal_content_gallery {
     top: 25%;
     max-width: 300px;
+    padding: 10px 10px;
   }
-  #modalImage {
-    height: 200px;
+  .defaul_gallery_modal_img,
+  .android_gallery_modal_img {
+    width: 100%;
+    height: 200px !important;
   }
+
   .modal_content {
     max-width: 270px;
   }

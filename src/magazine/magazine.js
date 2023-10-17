@@ -53,8 +53,21 @@ document.addEventListener("DOMContentLoaded", async function () {
       const imageUrl = imagePath
         ? `https://cms.absherontm.az/uploads/images/${imagePath}`
         : "../../assets/images/magazine/default.jpg";
+      // İlk harfi kontrol etmek için
+      const firstLetter = imagePath ? imagePath[0].toLowerCase() : "";
+
+      // CSS sınıfını belirle
+      const cssClass =
+        firstLetter === "i"
+          ? "ios_img"
+          : firstLetter === "a"
+          ? "android_img"
+          : "defaul_img";
       kart.innerHTML = `
-      <img src=${imageUrl} />
+      <div class='magazine_img_div'>
+      <img src=${imageUrl} class="${cssClass}" />
+      </div>
+     
               <ul class="magazine_text_ul">
                 <li>
                   Mağaza adı:<br />

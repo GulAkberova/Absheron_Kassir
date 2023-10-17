@@ -70,7 +70,9 @@ document.addEventListener("DOMContentLoaded", async function () {
               <div class="magazine_text_end">
                 <p>Magaza: <b>${item.number ? item.number : ""}</b></p>
 
-                <p>Sıra: <b>1</b></p>
+                <p>Sıra: <b>${
+                  item.shopRow.name ? item.shopRow.name : ""
+                }</b></p>
 
                 <div>
                 <button class="${

@@ -199,6 +199,7 @@
 .tm_header_bigdiv {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .tm_header_bigdiv h2 {
   color: var(--blue-color);
@@ -207,6 +208,13 @@
   font-weight: 600;
   line-height: normal;
   letter-spacing: -0.135px;
+}
+.tm_header_bigdiv h2 a {
+  color: var(--blue-color);
+}
+.tm_header_bigdiv h4 a {
+  color: #151ccd;
+  text-decoration: underline;
 }
 @media (max-width: 450px) {
   .tm_header_bigdiv h2 {
@@ -1167,5 +1175,17 @@
 @media (max-width: 450px) {
   .ios_img {
     object-fit: initial;
+  }
+}
+/* _____________________ */
+
+.allkorpus_div h3 {
+  padding: 0px 20px;
+  max-width: 150px;
+  height: 55px;
+}
+@media (max-width: 400px) {
+  .allkorpus_div h3 {
+    max-width: 100px;
   }
 }

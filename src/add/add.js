@@ -205,7 +205,7 @@ saveButton.addEventListener("click", () => {
     console.log(statuss, "formData");
 
     $.ajax({
-      url: `http://localhost:5137/api/admin/shoprepo/shops/update?Id=25`,
+      url: `https://cms.absherontm.az/api/admin/shoprepo/shops/update?Id=26&PrestijId=6&SektorId=8`,
       method: "POST",
       dataType: false,
       data: formData,

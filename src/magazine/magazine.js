@@ -50,9 +50,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       kart.href = targetURL;
       const imagePath = item.imgs[item.imgs.length - 1]?.imagePath;
-      const imageUrl = imagePath
-        ? `https://cms.absherontm.az/uploads/images/${imagePath}`
-        : "../../assets/images/magazine/default.jpg";
+      const imageUrl =
+        imagePath && item.status
+          ? `https://cms.absherontm.az/uploads/images/${imagePath}`
+          : "../../assets/images/magazine/default.jpg";
       // İlk harfi kontrol etmek için
       const firstLetter = imagePath ? imagePath[0].toLowerCase() : "";
 

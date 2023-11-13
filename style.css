@@ -1189,3 +1189,22 @@
     max-width: 100px;
   }
 }
+/* ___________________________ */
+.status_main_image_div {
+  height: 419px;
+}
+.status_main_image_div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 650px) {
+  .status_main_image_div {
+    height: 250px;
+  }
+}
+@media (max-width: 350px) {
+  .status_main_image_div {
+    height: 150px;
+  }
+}

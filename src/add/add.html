@@ -106,6 +106,67 @@
                   style="display: flex; flex-wrap: wrap"
                 ></div>
               </div>
+              <div class="info_status_btns">
+                <button id="open-info-button" type="button">Qeyd etmek</button>
+
+                <button id="open-status-button" type="button">
+                  Icra veziyyeti
+                </button>
+              </div>
+              <!-- ______________INFO_MODAL_____________ -->
+              <div id="info_modal" class="modal">
+                <div class="modal_content">
+                  <div class="modal_header">
+                    <h3>Qeyd</h3>
+
+                    <span class="close" id="close_calendar">&times;</span>
+                  </div>
+                  <div class="calendar_div">
+                    <form>
+                      <textarea id="myTextarea"> </textarea>
+                      <br />
+                      <button
+                        type="button"
+                        id="modal_send_btn"
+                        class="modal_info_send_btn"
+                      >
+                        Gonder
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- ______________STATUS_MODAL_____________ -->
+              <div id="status_modal" class="modal">
+                <div class="modal_content">
+                  <div class="modal_header">
+                    <h3>Icra Veziyyeti</h3>
+
+                    <span class="close" id="close_status">&times;</span>
+                  </div>
+                  <div class="calendar_div">
+                    <form>
+                      <label>
+                        <input type="radio" name="status" value="icradadir" />
+                        Icradadir
+                      </label>
+                      <br />
+                      <label>
+                        <input type="radio" name="status" value="temirdedir" />
+                        Temirdedir
+                      </label>
+                      <br />
+                      <button
+                        type="button"
+                        id="modal_send_status_btn"
+                        class="modal_info_send_btn"
+                      >
+                        Gonder
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
 

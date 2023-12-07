@@ -30,12 +30,6 @@ captureButton.addEventListener("click", async () => {
 
 let capturedPhotoBlob = null;
 let overlayContainer = null; // Değişkeni tanımlayın
-
-// Kameranın boyutlarını pencere boyutlarına uygun olarak güncelle
-// cameraFeed.width = window.innerWidth;
-// cameraFeed.height = window.innerHeight;
-
-// KameraFeed boyutlarını güncelle
 window.addEventListener("resize", () => {
   // cameraFeed.width = window.innerWidth;
   // cameraFeed.height = window.innerHeight;
@@ -92,26 +86,6 @@ function createOverlay() {
   addButton.addEventListener("click", () => {
     const currentTime = new Date(); // Şu anki tarih ve saat
     // _______________________________________________________________
-
-    // const canvasDataUrl = canvas.toDataURL("image/jpeg"); // Get the canvas data as a data URL
-    // const base64Image = canvasDataUrl.split(",")[1]; // Extract the base64-encoded image data
-    // console.log(canvasDataUrl, "url");
-    // console.log(base64Image, "base64Image");
-
-    // // Convert the base64 data to a Blob object
-    // const byteCharacters = atob(base64Image);
-    // const byteNumbers = new Array(byteCharacters.length);
-    // console.log(byteCharacters, "byteCharacters");
-    // console.log(byteNumbers, "byteNumbers");
-
-    // for (let i = 0; i < byteCharacters.length; i++) {
-    //   byteNumbers[i] = byteCharacters.charCodeAt(i);
-    // }
-
-    // const byteArray = new Uint8Array(byteNumbers);
-    // const imageBlob = new Blob([byteArray], { type: "image/jpeg" });
-    // console.log(byteArray, "byteArray");
-    // console.log(imageBlob, "imageBlob");
 
     // ___________________________________________________________________________--
 
@@ -191,6 +165,102 @@ buttons.forEach((button, index) => {
 });
 const arr = [];
 
+// ___________________________INFO_MODAL_BTN____________________________
+// Add these functions to your existing JavaScript code
+
+function openModal() {
+  const modal = document.getElementById("myModal");
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  const modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
+function saveModal() {
+  const textareaValue = document.getElementById("myTextarea").value;
+  console.log("Textarea Value:", textareaValue);
+  // You can include additional logic here, such as sending the value to the server
+
+  // Close the modal
+  closeModal();
+}
+// __________________________________________
+
+function openModal(modal) {
+  modal.style.display = "block";
+}
+
+function closeModal(modal) {
+  modal.style.display = "none";
+}
+document.addEventListener("DOMContentLoaded", function () {
+  const openInfoButton = document.getElementById("open-info-button");
+  const openStatusButton = document.getElementById("open-status-button");
+  const infoModal = document.getElementById("info_modal");
+  const statusModal = document.getElementById("status_modal");
+  const closeCalendarButton = document.getElementById("close_calendar");
+  const closeStatusButton = document.getElementById("close_status");
+  const modalSendButton = document.getElementById("modal_send_btn");
+  const modalSendStatusButton = document.getElementById(
+    "modal_send_status_btn"
+  );
+
+  infoModal.style.display = "none";
+  statusModal.style.display = "none";
+
+  openInfoButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    openModal(infoModal);
+  });
+  openStatusButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    openModal(statusModal);
+  });
+
+  closeCalendarButton.addEventListener("click", () => {
+    closeModal(infoModal);
+  });
+  closeStatusButton.addEventListener("click", () => {
+    closeModal(statusModal);
+  });
+  modalSendButton.addEventListener("click", () => {
+    const textareaValue = document.getElementById("myTextarea").value;
+    console.log("Textarea Value:", textareaValue);
+    closeModal(infoModal);
+  });
+  modalSendStatusButton.addEventListener("click", () => {
+    const statusRadioButtons = document.getElementsByName("status");
+    let selectedStatus = null;
+
+    for (const radioButton of statusRadioButtons) {
+      if (radioButton.checked) {
+        selectedStatus = radioButton.value;
+        break;
+      }
+    }
+
+    if (selectedStatus) {
+      console.log("Selected Status:", selectedStatus);
+      closeModal(statusModal);
+    } else {
+      console.log("Please select a status.");
+    }
+  });
+  window.addEventListener("click", (event) => {
+    if (event.target === infoModal) {
+      closeModal(infoModal);
+    }
+
+    if (event.target === statusModal) {
+      closeModal(statusModal);
+    }
+  });
+});
+
+// _________________________________________---
+
 saveButton.addEventListener("click", () => {
   if (selectedImages.length > 0) {
     console.log("Selected Images:", selectedImages);
@@ -199,10 +269,18 @@ saveButton.addEventListener("click", () => {
       formData.append("photos", selectedImages[i]);
       console.log(selectedImages[i], "seEeeeeee"); // Append the image file to the "photos[]" array
     }
-    // formData.append("id", Id);
     formData.append("status", statuss);
-    // console.log(formData, "formData");
     console.log(statuss, "formData");
+
+    // ____________________________INFOOOO____________________________
+    // Append textarea value to FormData
+    formData.append("additionalInfo", textareaValue);
+    console.log(textareaValue, "textareaValue");
+
+    // ____________________________STATUSSSS_____________________________
+
+    formData.append("selectedStatus", selectedStatus);
+    console.log(selectedStatus, "selectedStatus");
 
     $.ajax({
       url: `https://cms.absherontm.az/api/admin/shoprepo/shops/update?Id=26&PrestijId=6&SektorId=8`,

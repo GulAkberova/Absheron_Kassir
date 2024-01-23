@@ -3,7 +3,21 @@ const cameraFeed_Bigdiv = document.getElementById("cameraFeed_Bigdiv");
 const captureButton = document.getElementById("captureButton");
 const canvas = document.getElementById("canvas");
 const imageContainer = document.getElementById("imageContainer");
+// Kassa BUttons
+const kassaVar = document.getElementById("kassaVar");
+const kassaYok = document.getElementById("kassaYok");
+// Qr code buttons
+const qrVar = document.getElementById("qrVar");
+const qrYok = document.getElementById("qrYok");
+// Error
+const error = document.getElementById("error");
+// Get the modal
+const modal = document.getElementById("myModal");
+// Get the <span> element that closes the modal
+const closeBtn = document.getElementsByClassName("closeQr");
+// Send button
 const saveButton = document.getElementById("saveButton");
+
 let selectedImages = [];
 
 let facingMode = "environment"; // Başlangıçta arka kamera
@@ -258,8 +272,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+// _________________CHecking Buttons(QR code and Kassa)_____________________//
 
-// _________________________________________---
+let kassa = false;
+let qr = false;
+// function to log chechData
+function logCheckData() {
+  // update checkData array
+  kassa = kassa;
+  qr = qr;
+}
+
+// kassVar button onclick
+kassaVar.onclick = function () {
+  modal.style.display = "block";
+  kassa = true;
+  qrVar.onclick = function () {
+    qr = true;
+    logCheckData();
+    modal.style.display = "none";
+  };
+  qrYok.onclick = function () {
+    qr = false;
+    logCheckData();
+    modal.style.display = "none";
+  };
+  // update logCheckData
+  logCheckData();
+};
+// KassaYok button onclick
+kassaYok.onclick = function () {
+  kassa = false;
+  qr = false;
+  error.innerHTML = "";
+  logCheckData();
+};
+
+const newClosebtn = closeBtn[0];
+
+newClosebtn.onclick = function () {
+  modal.style.display = "none";
+  if (kassa !== "" && qr !== "") {
+    error.style.display = "none";
+  } else {
+    error.style.display = "block";
+  }
+  logCheckData();
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+logCheckData();
+// _________________________________________//
 
 saveButton.addEventListener("click", () => {
   if (selectedImages.length > 0) {
@@ -271,17 +339,23 @@ saveButton.addEventListener("click", () => {
     }
     formData.append("status", statuss);
     console.log(statuss, "formData");
+    // ____________________________KASSA_____________________________
+    formData.append("kassa", kassa);
+    console.log(kassa, "kassa");
 
-    // ____________________________INFOOOO____________________________
-    // Append textarea value to FormData
-    formData.append("additionalInfo", textareaValue);
-    console.log(textareaValue, "textareaValue");
+    // ____________________________QR_____________________________
+    formData.append("qrcode", qr);
+    console.log(qr, "qrcode");
 
     // ____________________________STATUSSSS_____________________________
 
     formData.append("selectedStatus", selectedStatus);
     console.log(selectedStatus, "selectedStatus");
 
+    // ____________________________INFOOOO____________________________
+    // Append textarea value to FormData
+    formData.append("additionalInfo", textareaValue);
+    console.log(textareaValue, "textareaValue");
     $.ajax({
       url: `https://cms.absherontm.az/api/admin/shoprepo/shops/update?Id=26&PrestijId=6&SektorId=8`,
       method: "POST",

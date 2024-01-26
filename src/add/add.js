@@ -155,12 +155,13 @@ function closeOverlay() {
 }
 // ______________________Buttons____________________
 let statuss = false;
-console.log(statuss, "statuss");
+
 // Buttons olay dinleyicilerini ekle
 const buttons = document.querySelectorAll(".status_body_buttons_end button");
-
+console.log(buttons);
 buttons.forEach((button, index) => {
   button.addEventListener("click", () => {
+    console.log(button, "button");
     // Tüm düğmeleri gri yap
     buttons.forEach((btn) => {
       btn.classList.remove("status_body_buttons_red");
@@ -174,9 +175,10 @@ buttons.forEach((button, index) => {
 
     // Status'u güncelle (true veya false)
     statuss = index === 0; // İlk düğme tıklanırsa status true, ikinci düğme tıklanırsa status false
-    console.log("Status:", statuss);
+    console.log(statuss);
   });
 });
+
 const arr = [];
 
 // ___________________________INFO_MODAL_BTN____________________________
@@ -282,11 +284,30 @@ function logCheckData() {
   kassa = kassa;
   qr = qr;
 }
+const checButtons = document.querySelectorAll(
+  ".status_body_buttons_end_kassa button"
+);
+console.log(checButtons);
+checButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log(button, "button");
+    // Tüm düğmeleri gri yap
+    checButtons.forEach((btn) => {
+      btn.classList.remove("status_body_buttons_red");
+      btn.classList.add("status_body_buttons_gray");
+      console.log(btn);
+    });
 
+    // Seçilen düğmeyi kırmızı yap ve status'u güncelle
+    button.classList.remove("status_body_buttons_gray");
+    button.classList.add("status_body_buttons_red");
+  });
+});
 // kassVar button onclick
 kassaVar.onclick = function () {
   modal.style.display = "block";
   kassa = true;
+
   qrVar.onclick = function () {
     qr = true;
     logCheckData();
